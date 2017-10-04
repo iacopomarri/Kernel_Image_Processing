@@ -24,6 +24,7 @@ private:
     char r;
     char g;
     char b;
+    int x;
 };
 
 
