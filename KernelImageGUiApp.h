@@ -6,9 +6,13 @@
 #define KERNELIMAGEPROCESSING_KERNELIMAGEGUIAPP_H
 
 
-class KernelImageGUiApp {
 
+
+#include <wx/app.h>
+
+class KernelImageGUiApp : public wxApp
+{
+public:
+    virtual bool OnInit();
 };
-
-
 #endif //KERNELIMAGEPROCESSING_KERNELIMAGEGUIAPP_H

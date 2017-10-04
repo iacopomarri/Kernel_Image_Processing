@@ -14,17 +14,28 @@ class Image{
 public:
     Image();
     virtual ~Image();
-
-    void loadImage(std::string filename);
-    void saveImage();
+    Image(const Image& copy);
 
 
+    Image operator=(const Image&);
 
-private:
-    string datatype;
+    virtual void loadImage(string filename, Image** ptr);
+  virtual  void saveImage(string filename){};
+
+    int getHeight()const;
+    int getWidth()const;
+    int getMax()const;
+    void setHeight(int h);
+    void setWidth(int w);
+    void setMax(int m);
+
+
+protected:
+    string magic;
     int width;
     int height;
     int max;
+    char* bytes;
     Color* pixels;
 
 };
