@@ -1,4 +1,4 @@
-/*#include <iostream>
+#include <iostream>
 #include "Image.h"
 
 using namespace std;
@@ -14,7 +14,7 @@ Image immagine;
 
 
 
-*/
+
 
 
 
