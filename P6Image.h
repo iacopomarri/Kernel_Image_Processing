@@ -1,0 +1,14 @@
+//
+// Created by iacopo on 23/10/16.
+//
+
+#ifndef KERNELIMAGEPROCESSING_P6IMAGE_H
+#define KERNELIMAGEPROCESSING_P6IMAGE_H
+
+
+class P6Image {
+
+};
+
+
+#endif //KERNELIMAGEPROCESSING_P6IMAGE_H
