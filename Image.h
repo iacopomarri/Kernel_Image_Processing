@@ -20,7 +20,7 @@ public:
     Image operator=(const Image&);
 
     virtual void loadImage(string filename, Image** ptr);
-  virtual  void saveImage(string filename){};
+    void saveImage(string filename);
 
     int getHeight()const;
     int getWidth()const;

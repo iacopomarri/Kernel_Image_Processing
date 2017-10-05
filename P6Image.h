@@ -12,7 +12,7 @@ class P6Image: public Image {
 public:
 
 virtual void loadImage(string filename);
-    virtual void saveImage(string filename)override;
+    //virtual void saveImage(string filename);
 
 
 };

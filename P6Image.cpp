@@ -61,7 +61,7 @@ void P6Image::loadImage(string filename) {
 
 }
 
-void P6Image::saveImage(string filename)     {
+/*void P6Image::saveImage(string filename)     {
     ofstream imageFile;
     imageFile.open(filename);
 
@@ -74,4 +74,4 @@ void P6Image::saveImage(string filename)     {
     imageFile.write(bytes,width*height*3);
     imageFile.close();          //close the stream
 
-}
+}*/

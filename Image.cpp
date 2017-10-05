@@ -27,7 +27,7 @@ void Image::loadImage(std::string filename, Image** ptr) {
                 cout << "Errore di caricamento" << endl;
         }
 
-        picture >> P6Image::magic >> P6Image::width >> P6Image::height >> P6Image::max;
+        picture >> Image::magic >> Image::width >> Image::height >> Image::max;
 
 
 
@@ -75,7 +75,7 @@ void Image::loadImage(std::string filename, Image** ptr) {
 
 
         if(magic=="P6") {
-                *ptr = new P6Image;
+               // *ptr = new P6Image;
 
 
         }
@@ -83,7 +83,7 @@ void Image::loadImage(std::string filename, Image** ptr) {
 
 
 
-/*void Image::saveImage(std::string filename) {
+void Image::saveImage(std::string filename) {
 
         ofstream imageFile;
         imageFile.open(filename);
@@ -98,7 +98,7 @@ void Image::loadImage(std::string filename, Image** ptr) {
         imageFile.close();          //close the stream
 
 }
-*/
+
 
 Image Image::operator=(const Image& other)
 {

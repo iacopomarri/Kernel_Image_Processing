@@ -99,6 +99,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
 }
 
 Image immagine;
+Image ** ptr;
 
 
 
@@ -127,16 +128,11 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     //std::string path = s.ToStdString();
    // immagine.loadImage(path);
 
-    immagine->loadImage("/home/iacopo/Desktop/part1pairs/Test/emir.ppm", &immagine);         //IL VECCHIO SCAZZA DALLA RIGA 150 HEX. infatti alla riga 107 pos 2 dec c'e' un hashtag
+    immagine.loadImage("/home/iacopo/Desktop/part1pairs/Test/tree.ppm", ptr);         //IL VECCHIO SCAZZA DALLA RIGA 150 HEX. infatti alla riga 107 pos 2 dec c'e' un hashtag
 }                                                                                        //QUANDO ILPROGRAMMA LEGGE IL BYTE 00100000 CIOE 32, CIOE SPAZIO IN ASCII, LO SALTA.
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     Button2->Enable(false);
-    immagine->saveImage("/home/iacopo/Desktop/part1pairs/Test/cavia.ppm");
+    immagine.saveImage("/home/iacopo/Desktop/part1pairs/Test/cavia.ppm");
 }
 
-
-
-//PODERE MONTE LODOLI
-//VIA MONTORSOLI 4 SAN CASCIANO
-//FIRENZE SIENA E USCIRE A TAVARNELLE
