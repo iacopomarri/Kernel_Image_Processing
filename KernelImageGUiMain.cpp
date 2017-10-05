@@ -46,8 +46,10 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 
 //(*IdInit(KernelImageGUiFrame)
 const long KernelImageGUiFrame::ID_BUTTON1 = wxNewId();
-const long KernelImageGUiFrame::ID_TEXTCTRL1 = wxNewId();
 const long KernelImageGUiFrame::ID_BUTTON2 = wxNewId();
+const long KernelImageGUiFrame::ID_TEXTCTRL1 = wxNewId();
+const long KernelImageGUiFrame::ID_TEXTCTRL2 = wxNewId();
+const long KernelImageGUiFrame::ID_STATICTEXT1 = wxNewId();
 const long KernelImageGUiFrame::ID_MENUITEM1 = wxNewId();
 const long KernelImageGUiFrame::idMenuAbout = wxNewId();
 const long KernelImageGUiFrame::ID_STATUSBAR1 = wxNewId();
@@ -70,8 +72,10 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
     Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
     SetClientSize(wxSize(737,463));
     Button1 = new wxButton(this, ID_BUTTON1, _("Load"), wxPoint(112,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("File Path"), wxPoint(352,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
-    Button2 = new wxButton(this, ID_BUTTON2, _("Save"), wxPoint(144,272), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
+    Button2 = new wxButton(this, ID_BUTTON2, _("Save"), wxPoint(112,272), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
+    TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("File Path"), wxPoint(260,64), wxSize(400,-1), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
+    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, _("File Path"), wxPoint(260,272), wxSize(400,-1), 0, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+    StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Loaded path: None"), wxPoint(260,100), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
     MenuItem1 = new wxMenuItem(Menu1, ID_MENUITEM1, _("Quit\tAlt-F4"), _("Quit the application"), wxITEM_NORMAL);
@@ -99,7 +103,6 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
 }
 
 Image immagine;
-Image ** ptr;
 
 
 
@@ -123,16 +126,25 @@ void KernelImageGUiFrame::OnAbout(wxCommandEvent& event)
 void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 
 {
+    //attiva il pulsante salva
     Button2->Enable(true);
-   // wxString s= TextCtrl1->GetToolTipText();
-    //std::string path = s.ToStdString();
-   // immagine.loadImage(path);
+    //prende il testo nella casella del percorso da caricare
+    wxString s= TextCtrl1->GetValue();
+    //converte in standard string
+    std::string loadPath = s.ToStdString();
+    //carica l'immagine
+    immagine.loadImage(loadPath);
+    //aggiorna la label del percorso caricato
+    StaticText1->SetLabel("Loaded path:  "+ s);
 
-    immagine.loadImage("/home/iacopo/Desktop/part1pairs/Test/tree.ppm", ptr);         //IL VECCHIO SCAZZA DALLA RIGA 150 HEX. infatti alla riga 107 pos 2 dec c'e' un hashtag
-}                                                                                        //QUANDO ILPROGRAMMA LEGGE IL BYTE 00100000 CIOE 32, CIOE SPAZIO IN ASCII, LO SALTA.
+
+    //          /home/iacopo/Desktop/part1pairs/Test/stop.ppm
+}
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
-    Button2->Enable(false);
-    immagine.saveImage("/home/iacopo/Desktop/part1pairs/Test/cavia.ppm");
+    wxString s= TextCtrl2->GetValue();
+    std::string savePath = s.ToStdString();
+    immagine.saveImage(savePath);
+
 }
 

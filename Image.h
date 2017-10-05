@@ -19,7 +19,7 @@ public:
 
     Image operator=(const Image&);
 
-    virtual void loadImage(string filename, Image** ptr);
+    void loadImage(string filename);
     void saveImage(string filename);
 
     int getHeight()const;

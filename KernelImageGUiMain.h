@@ -11,6 +11,7 @@
 #include <wx/statusbr.h>
 #include <wx/frame.h>
 #include <wx/textctrl.h>
+#include <wx/stattext.h>
 //*)
 
 class KernelImageGUiFrame: public wxFrame
@@ -37,8 +38,10 @@ private:
 
     //(*Identifiers(KernelImageGUiFrame)
     static const long ID_BUTTON1;
-    static const long ID_TEXTCTRL1;
     static const long ID_BUTTON2;
+    static const long ID_TEXTCTRL1;
+    static const long ID_TEXTCTRL2;
+    static const long ID_STATICTEXT1;
     static const long ID_MENUITEM1;
     static const long idMenuAbout;
     static const long ID_STATUSBAR1;
@@ -49,6 +52,8 @@ private:
     wxButton* Button1;
     wxButton* Button2;
     wxTextCtrl* TextCtrl1;
+    wxTextCtrl* TextCtrl2;
+    wxStaticText* StaticText1;
     //*)
 
 DECLARE_EVENT_TABLE()

@@ -2,7 +2,6 @@
 // Created by iacopo on 12/10/16.
 //
 #include "Image.h"
-#include "P6Image.h"
 #include <fstream>
 #include <iostream>
 #include <bitset>
@@ -20,7 +19,7 @@ int Image::getWidth()const {return width; }
 
 
 
-void Image::loadImage(std::string filename, Image** ptr) {
+void Image::loadImage(std::string filename  ) {
         ifstream picture;
         picture.open(filename);                            //open the stream to the file
         if (picture.fail()) {                              //check if che file it's been opened
@@ -71,14 +70,6 @@ void Image::loadImage(std::string filename, Image** ptr) {
 
 
         picture.close();             //close the stream
-
-
-
-        if(magic=="P6") {
-               // *ptr = new P6Image;
-
-
-        }
 }
 
 
@@ -135,45 +126,4 @@ Image::Image(const Image& copy)
 
 
 
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-/*
-  char* temp = new char[width*height*3];  //width*height*3
-
-
-        for (int i=0; i<width*height; i++)
-        {
-                temp[i*3] = pixels[i].getR();
-                temp[i*3+1] = pixels[i].getG();
-                temp[i*3+2] = pixels[i].getB();
-        }
- */
-
-
-/*  for(int i =0; i<width*height*3; i++)
-       {
-               imageFile << appoggio[i];
-       }*/
-
-
-
-//VECCHIO METODO PER LEGGERE IL FILE
-/*  for(int i=0; i<size;i++){                //extract one bytes per time from the file (in order r g b) and put them into che pixels array
-          char a;
-    //     cout<<i <<" : "<<"\t";
-
-          picture >> a;
-          pixels[i].setR(a);
-      //    cout<<(unsigned int)a<<"\t";   bitset<8>x(a);  cout<<x<<"\t";    cout<<a<<"\t\t\t";
-
-
-          picture >> a;
-          pixels[i].setG(a);
-       //   cout<<(unsigned int)a<<"\t";   bitset<8>y(a);  cout<<y<<"\t";            cout<<a<<"\t\t\t";
-
-
-          picture >> a;
-          pixels[i].setB(a);
-       //   cout<<(unsigned int)a<<"\t";   bitset<8>z(a);  cout<<z<<"\t";         cout<<a<<"\t\t\t"<<endl;
-
-  }*/

@@ -3,7 +3,7 @@ project(KernelImageProcessing)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
-set(SOURCE_FILES main.cpp Image.cpp Image.h Color.cpp Color.h KernelImageGUiMain.cpp KernelImageGUiMain.h KernelImageGUiApp.cpp KernelImageGUiApp.h P6Image.cpp P6Image.h)
+set(SOURCE_FILES main.cpp Image.cpp Image.h Color.cpp Color.h KernelImageGUiMain.cpp KernelImageGUiMain.h KernelImageGUiApp.cpp KernelImageGUiApp.h)
 add_executable(KernelImageProcessing ${SOURCE_FILES})
 
 find_package(wxWidgets REQUIRED net core base)

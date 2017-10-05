@@ -9,7 +9,7 @@
 #include <wx/image.h>
 //*)
 
-IMPLEMENT_APP(KernelImageGUiApp);
+    IMPLEMENT_APP(KernelImageGUiApp);
 
 bool KernelImageGUiApp::OnInit()
 {
