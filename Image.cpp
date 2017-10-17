@@ -16,9 +16,6 @@ int Image::getHeight()const{return height; }
 int Image::getWidth()const {return width; }
 
 
-
-
-
 void Image::loadImage(std::string filename  ) {
         ifstream picture;
         picture.open(filename);                            //open the stream to the file
@@ -28,13 +25,10 @@ void Image::loadImage(std::string filename  ) {
 
         picture >> Image::magic >> Image::width >> Image::height >> Image::max;
 
-
-
         cout<<magic<<endl;
         cout<<width<<endl;
         cout<<height<<endl;
         cout<<max<<endl;
-
 
         pixels = new Color[width*height];       //  allocate memory for the pixels array
         int size = width*height;

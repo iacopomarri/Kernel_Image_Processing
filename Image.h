@@ -7,6 +7,10 @@
 
 #include <string>
 #include "Color.h"
+#include "Channel_1.h"
+#include "Channels_2.h"
+#include "Channels_3.h"
+#include "Channels_4.h"
 
 using namespace std;
 
@@ -15,7 +19,6 @@ public:
     Image();
     virtual ~Image();
     Image(const Image& copy);
-
 
     Image operator=(const Image&);
 

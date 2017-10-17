@@ -30,6 +30,8 @@ wxString wxbuildinfo(wxbuildinfoformat format)
     {
 #if defined(__WXMSW__)
         wxbuild << _T("-Windows");
+#elif defined(__WXMAC__)
+        wxbuild << _T("-Mac");
 #elif defined(__UNIX__)
         wxbuild << _T("-Linux");
 #endif
@@ -60,7 +62,7 @@ BEGIN_EVENT_TABLE(KernelImageGUiFrame,wxFrame)
                 //*)
 END_EVENT_TABLE()
 
-KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
+KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id) : wxFrame(parent, wxID_ANY, _T("TITOLO"), wxDefaultPosition, wxDefaultSize)
 {
     //(*Initialize(KernelImageGUiFrame)
     wxMenuItem* MenuItem2;
@@ -69,7 +71,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
     wxMenuBar* MenuBar1;
     wxMenu* Menu2;
 
-    Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
+    //Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
     SetClientSize(wxSize(737,463));
     Button1 = new wxButton(this, ID_BUTTON1, _("Load"), wxPoint(112,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
     Button2 = new wxButton(this, ID_BUTTON2, _("Save"), wxPoint(112,272), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
@@ -102,7 +104,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
     //*)
 }
 
-Image immagine;
+
 
 
 
@@ -137,8 +139,6 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
 
-
-    //          /home/iacopo/Desktop/part1pairs/Test/stop.ppm
 }
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
