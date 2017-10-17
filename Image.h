@@ -6,7 +6,6 @@
 #define KERNELIMAGEPROCESSING_IMAGE_H
 
 #include <string>
-#include "Color.h"
 #include "Channel_1.h"
 #include "Channels_2.h"
 #include "Channels_3.h"
@@ -39,7 +38,7 @@ protected:
     int height;
     int max;
     char* bytes;
-    Color* pixels;
+    Channels_3* pixels;
 
 };
 
