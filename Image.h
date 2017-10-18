@@ -21,6 +21,10 @@ public:
 
     void loadImage(string filename);
     void saveImage(string filename);
+    void effect(int effectCode);
+
+
+
 
     int getHeight()const;
     int getWidth()const;
@@ -30,13 +34,15 @@ public:
     void setMax(int m);
 
 
-protected:
+private:
     string magic;
     int width;
     int height;
     int max;
     char* bytes;
     Color* pixels;
+    int  sharpen[9]={0,-1,0,-1,5,-1,0,-1,0};
+
 
 };
 

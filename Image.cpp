@@ -15,6 +15,21 @@ int Image::getHeight()const{return height; }
 
 int Image::getWidth()const {return width; }
 
+void Image::effect(int effectCode)
+{
+   /* int NexternalCicle=(width-2)*(height-2);
+
+
+    for(int i=0; i<NexternalCicle; i++)
+    {
+        int sum = 0;
+d        {
+            sharpen[j]*bytes[i]
+        }
+
+    }*/
+}
+
 
 
 
@@ -60,7 +75,7 @@ void Image::loadImage(std::string filename  ) {
 
         for(int i=0; i<6000;i++){
 
-                cout<<i <<" : "<<"\t";
+                //cout<<i <<" : "<<"\t";
 
                 cout<<(unsigned int)pixels[i].getR()<<"\t";      bitset<8>x(pixels[i].getR());  cout<<x<<"\t";     cout<<pixels[i].getR()<<"\t\t\t";
                 cout<<(unsigned int)pixels[i].getG()<<"\t";      bitset<8>y(pixels[i].getG());  cout<<y<<"\t";     cout<<pixels[i].getG()<<"\t\t\t";
@@ -80,8 +95,8 @@ void Image::saveImage(std::string filename) {
         imageFile.open(filename);
 
         // write the ppm header
-        imageFile << "P6" << endl << width << endl << height
-        << endl << "255";// << endl;
+        imageFile << magic << endl << width<< endl << height
+        << endl << to_string(max);// << endl;
 
 
     //  SCRIVE IL CONTENUTO DI BYTES NEL FILE

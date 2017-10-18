@@ -1,6 +1,10 @@
 //
 // Created by iacopo on 19/10/16.
-//
+
+//macports
+
+
+
 
 #include "KernelImageGUiMain.h"
 #include <wx/msgdlg.h>
@@ -136,10 +140,10 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     immagine.loadImage(loadPath);
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
+    }
 
+    //          /home/iacopo/Desktop/immagini/stop.ppm
 
-    //          /home/iacopo/Desktop/part1pairs/Test/stop.ppm
-}
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     wxString s= TextCtrl2->GetValue();
