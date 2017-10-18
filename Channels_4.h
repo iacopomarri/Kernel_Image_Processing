@@ -5,31 +5,20 @@
 #ifndef KERNELIMAGEPROCESSING_CHANNELS_4_H
 #define KERNELIMAGEPROCESSING_CHANNELS_4_H
 
+#include "Transparent_Color.h"
+#include <string>
+#include "Image.h"
 
-class Channels_4 {
+class Channels_4: public Image {
 public:
     Channels_4();
-    Channels_4(char r, char g, char b, char a);
-
-    char getR() const;
-    void setR(char r);
-
-    char getG() const;
-    void setG(char g);
-
-    char getB() const;
-    void setB(char b);
-
-    char getA() const;
-    void setA(char a);
+    void loadImage(string filename) override ;
+    void saveImage(string filename) override ;
 
 private:
-    char r;
-    char g;
-    char b;
-    char a;
-
+    Transparent_Color** pixels;
 };
+
 
 
 #endif //KERNELIMAGEPROCESSING_CHANNELS_4_H
