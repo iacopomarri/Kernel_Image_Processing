@@ -1,29 +1,21 @@
 //
 // Created by Lorenzo De Luca on 16/10/17.
 //
-
 #ifndef KERNELIMAGEPROCESSING_CHANNELS_3_H
 #define KERNELIMAGEPROCESSING_CHANNELS_3_H
 
+#include <string>
+#include "Color.h"
+#include "Image.h"
 
-class Channels_3 {
+class Channels_3: public Image {
     public:
         Channels_3();
-        Channels_3(char r, char g, char b);
-
-        char getR() const;
-        void setR(char r);
-
-        char getG() const;
-        void setG(char g);
-
-        char getB() const;
-        void setB(char b);
+        void loadImage(string filename)override ;
+        void saveImage(string filename)override ;
 
     private:
-        char r;
-        char g;
-        char b;
+        Color** pixels;
     };
 
 

@@ -3,18 +3,69 @@
 //
 
 #include "Channels_4.h"
+#include <fstream>
+#include <iostream>
+#include <bitset>
 
-Channels_4::Channels_4():r(0), g(0), b(0), a(0) {}
-Channels_4::Channels_4(char red,  char green, char blu, char alpha): r(red), g(green),b(blu), a(alpha) {};
+Channels_4::Channels_4():Image(){}
 
-char Channels_4::getR() const {return r;}
-void Channels_4::setR(char r) {this->r=r;}
 
-char Channels_4::getG() const {return g;}
-void Channels_4::setG(char g) {this->g=g;}
+void Channels_4::loadImage(string filename) {
 
-char Channels_4::getB() const {return b;}
-void Channels_4::setB(char b) {this->b=b;}
+    ifstream picture;
+    picture.open(filename);                            //open the stream to the file
+    if (picture.fail()) {                              //check if che file it's been opened
+        cout << "Errore di caricamento" << endl;
+    }
 
-char Channels_4::getA() const {return a;}
-void Channels_4::setA(char a) {this->a=a;}
+    picture >> Channels_4::magic >> Channels_4::width >> Channels_4::height >> Channels_4::max;
+
+
+
+    cout<<magic<<endl;
+    cout<<width<<endl;
+    cout<<height<<endl;
+    cout<<max<<endl;
+
+
+    pixels = new Transparent_Color*[width];         //  allocate memory for the pixels matrix
+    for(int i=0; i<width;i++)
+        pixels[i]=new Transparent_Color[height];
+
+    int size = width*height;
+
+    bytes = new char[size*4];
+
+
+    //LEGGE IL FILE E LO METTE IN bytes
+    picture.read(bytes, size*4);
+
+
+
+    // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
+    for (int i=0; i<height; i++)
+        for(int j=0; j<width;j++) {
+            pixels[i][j].setR(bytes[(j * 4)+(i*width*4)]);
+            pixels[i][j].setG(bytes[(j * 4)+(i*width*4)]);
+            pixels[i][j].setB(bytes[(j * 4)+(i*width*4)]);
+            pixels[i][j].setA(bytes[(j * 4)+(i*width*4)]);
+        }
+
+
+    picture.close();             //close the stream
+}
+
+
+void Channels_4::saveImage(string filename) {
+    ofstream imageFile;
+    imageFile.open(filename);
+
+    // write the ppm header
+    imageFile << magic << endl << width<< endl << height
+              << endl << to_string(max);// << endl;
+
+
+    //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
+    imageFile.write(bytes,width*height*4);
+    imageFile.close(); //close the stream
+}
