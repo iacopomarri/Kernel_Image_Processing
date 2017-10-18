@@ -6,7 +6,10 @@
 #define KERNELIMAGEPROCESSING_IMAGE_H
 
 #include <string>
-#include "Color.h"
+#include "Channel_1.h"
+#include "Channels_2.h"
+#include "Channels_3.h"
+#include "Channels_4.h"
 
 using namespace std;
 
@@ -16,15 +19,10 @@ public:
     virtual ~Image();
     Image(const Image& copy);
 
-
     Image operator=(const Image&);
 
     void loadImage(string filename);
     void saveImage(string filename);
-    void effect(int effectCode);
-
-
-
 
     int getHeight()const;
     int getWidth()const;
@@ -34,15 +32,13 @@ public:
     void setMax(int m);
 
 
-private:
+protected:
     string magic;
     int width;
     int height;
     int max;
     char* bytes;
-    Color* pixels;
-    int  sharpen[9]={0,-1,0,-1,5,-1,0,-1,0};
-
+    Channels_3* pixels;
 
 };
 

@@ -1,0 +1,14 @@
+//
+// Created by iacopo on 18/10/17.
+//
+
+#ifndef KERNELIMAGEPROCESSING_TRANSPARENT_COLOR_H
+#define KERNELIMAGEPROCESSING_TRANSPARENT_COLOR_H
+
+
+class Transparent_Color {
+
+};
+
+
+#endif //KERNELIMAGEPROCESSING_TRANSPARENT_COLOR_H

@@ -31,9 +31,6 @@ d        {
 }
 
 
-
-
-
 void Image::loadImage(std::string filename  ) {
         ifstream picture;
         picture.open(filename);                            //open the stream to the file
@@ -43,15 +40,12 @@ void Image::loadImage(std::string filename  ) {
 
         picture >> Image::magic >> Image::width >> Image::height >> Image::max;
 
-
-
         cout<<magic<<endl;
         cout<<width<<endl;
         cout<<height<<endl;
         cout<<max<<endl;
 
-
-        pixels = new Color[width*height];       //  allocate memory for the pixels array
+        pixels = new Channels_3[width*height];       //  allocate memory for the pixels array
         int size = width*height;
 
         bytes = new char[size*3];
@@ -123,10 +117,10 @@ Image::Image(const Image& copy)
         height = copy.height;
      //   loader = copy.loader;
 
-        pixels = new Color[copy.height];
+        pixels = new Channels_3[copy.height];
         for(int i = 0; i < copy.height; i++)
         {
-                pixels = new Color[copy.width];
+                pixels = new Channels_3[copy.width];
         }
 
         for(int h = 0; h < copy.height; h++)

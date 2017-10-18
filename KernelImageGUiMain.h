@@ -12,6 +12,7 @@
 #include <wx/frame.h>
 #include <wx/textctrl.h>
 #include <wx/stattext.h>
+#include "Image.h"
 //*)
 
 class KernelImageGUiFrame: public wxFrame
@@ -55,6 +56,7 @@ private:
     wxTextCtrl* TextCtrl2;
     wxStaticText* StaticText1;
     //*)
+    Image immagine;
 
 DECLARE_EVENT_TABLE()
 };
