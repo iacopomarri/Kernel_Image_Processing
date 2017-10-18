@@ -5,7 +5,6 @@
 #include "Color.h"
 
 Color::Color():r(0), g(0), b(0) {}
-Color::Color(char red,  char green, char blu): r(red), g(green),b(blu) {};
 
 char Color::getR() const {return r;}
 void Color::setR(char r) {this->r=r;}

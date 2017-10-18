@@ -2,7 +2,6 @@
 // Created by Lorenzo De Luca on 16/10/17.
 //
 
-#include <curses.h>
 #include "Channel_1.h"
 #include <fstream>
 #include <iostream>

@@ -9,7 +9,6 @@
 class Color {
 public:
     Color();
-    Color(char r, char g, char b);
 
     char getR() const;
     void setR(char r);
