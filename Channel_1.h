@@ -6,16 +6,18 @@
 #define KERNELIMAGEPROCESSING_CHANNEL_1_H
 
 
-class Channel_1 {
+#include "Image.h"
+
+class Channel_1: public Image {
 public:
     Channel_1();
-    Channel_1(bool w);
 
-    char getW() const;
-    void setW(bool w);
+    void loadImage(string filename)override;
+    void saveImage(string filename)override;
 
 private:
-    bool w;
+    bool** pixels;
+
 
 };
 

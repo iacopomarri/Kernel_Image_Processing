@@ -7,16 +7,22 @@
 #include <bitset>
 
 
-Image::Image():magic("nulla"),width(0),height(0),max(255){}
+Image::Image():magic("nulla"),width(0),height(0),max(0){}
 
-Image::~Image() { delete[] pixels; }
+Image::~Image() { delete[] bytes; }
 
 int Image::getHeight()const{return height; }
-
 int Image::getWidth()const {return width; }
+int Image::getMax()const{return max; }
+string Image::getMagic() const { return magic;}
+
+void Image::setHeight(int h){this->height=h;}
+void Image::setWidth(int w){this->width=w;}
+void Image::setMax(int m){this->max=m;}
+void Image::setMagic(string m) {this->magic = m;}
 
 
-void Image::loadImage(std::string filename  ) {
+/*void Image::loadImage(std::string filename  ) {
         ifstream picture;
         picture.open(filename);                            //open the stream to the file
         if (picture.fail()) {                              //check if che file it's been opened
@@ -30,7 +36,7 @@ void Image::loadImage(std::string filename  ) {
         cout<<height<<endl;
         cout<<max<<endl;
 
-        pixels = new Channels_3[width*height];       //  allocate memory for the pixels array
+        pixels = new Color[width*height];       //  allocate memory for the pixels array
         int size = width*height;
 
         bytes = new char[size*3];
@@ -102,10 +108,10 @@ Image::Image(const Image& copy)
         height = copy.height;
      //   loader = copy.loader;
 
-        pixels = new Channels_3[copy.height];
+        pixels = new Color[copy.height];
         for(int i = 0; i < copy.height; i++)
         {
-                pixels = new Channels_3[copy.width];
+                pixels = new Color[copy.width];
         }
 
         for(int h = 0; h < copy.height; h++)
@@ -115,7 +121,8 @@ Image::Image(const Image& copy)
                         pixels[h*w] = copy.pixels[h*w];
                 }
         }
-}
+
+}*/
 
 
 
