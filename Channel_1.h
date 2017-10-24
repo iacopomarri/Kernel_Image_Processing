@@ -5,20 +5,19 @@
 #ifndef KERNELIMAGEPROCESSING_CHANNEL_1_H
 #define KERNELIMAGEPROCESSING_CHANNEL_1_H
 
-
+#include <string>
 #include "Image.h"
 
 class Channel_1: public Image {
 public:
     Channel_1();
+    ~Channel_1();
 
     void loadImage(string filename)override;
     void saveImage(string filename)override;
 
 private:
     bool** pixels;
-
-
 };
 
 

@@ -1,14 +1,10 @@
-//
-// Created by iacopo on 19/10/16.
-
-//macports
-
-
 
 
 #include "KernelImageGUiMain.h"
 #include <wx/msgdlg.h>
 #include "Channels_2.h"
+#include "Channels_3.h"
+#include "Channel_1.h"
 
 //(*InternalHeaders(KernelImageGUiFrame)
 #include <wx/string.h>
@@ -107,10 +103,10 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
     //*)
 }
 
-Image immagine;
 
 
-Channels_2 immagine;
+
+
 
 KernelImageGUiFrame::~KernelImageGUiFrame()
 {
@@ -139,18 +135,18 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     //converte in standard string
     std::string loadPath = s.ToStdString();
     //carica l'immagine
-    immagine.loadImage(loadPath);
+    i3.loadImage(loadPath);
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
     }
 
-    //          /home/iacopo/Desktop/immagini/stop.ppm
+            //          /home/iacopo/Desktop/immagini/MARBLES.PBM
 
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     wxString s= TextCtrl2->GetValue();
     std::string savePath = s.ToStdString();
-    immagine.saveImage(savePath);
+    i3.saveImage(savePath);
 
 }
 

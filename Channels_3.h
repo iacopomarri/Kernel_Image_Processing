@@ -11,6 +11,7 @@
 class Channels_3: public Image {
     public:
         Channels_3();
+
         void loadImage(string filename)override ;
         void saveImage(string filename)override ;
 

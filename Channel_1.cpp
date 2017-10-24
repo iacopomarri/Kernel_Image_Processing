@@ -1,6 +1,4 @@
-//
-// Created by Lorenzo De Luca on 16/10/17.
-//
+
 
 #include "Channel_1.h"
 #include <fstream>
@@ -9,6 +7,13 @@
 
 Channel_1::Channel_1():Image(){}
 
+Channel_1::~Channel_1(){
+    for(int i = 0; i < width; ++i) {
+        delete [] pixels[i];
+    }
+    delete [] pixels;
+};
+
 void Channel_1::loadImage(string filename) {
     ifstream picture;
     picture.open(filename);                            //open the stream to the file
@@ -16,27 +21,72 @@ void Channel_1::loadImage(string filename) {
         cout << "Errore di caricamento" << endl;
     }
 
-    picture >> Channel_1::magic >> Channel_1::height >> Channel_1::width >> Channel_1::max;
+
+    //controlla se la riga letta  è un commento, in tal caso la salta
+        string a="";
+        bool flag=false;
+
+        while(!flag) {
+            picture >> a;
+            if (a == "#")
+                std::getline(picture, a);
+            else
+                flag = true;
+                magic=a;
+        }
+
+        flag=false;
+
+        while(!flag) {
+            picture >> a;
+            if (a == "#")
+                std::getline(picture, a);
+            else
+                flag = true;
+            width=atoi(a.c_str());
+        }
+
+        flag=false;
+
+        while(!flag) {
+            picture >> a;
+            if (a == "#")
+                std::getline(picture, a);
+            else
+                flag = true;
+            height=atoi(a.c_str());
+        }
+
+
+
+
+
 
     cout<<magic<<endl;
     cout<<width<<endl;
     cout<<height<<endl;
-    cout<<max<<endl;
 
-    pixels = new bool*[width]; //  allocate memory for the pixels matrix
-    for(int i=0; i<width;i++)
-        pixels[i]=new bool[height];
-    int size = width*height;
 
-    bytes = new char[size/8];
+    pixels = new bool*[height]; //  allocate memory for the pixels matrix
 
+    for(int i=0; i<height;i++) {
+        pixels[i] = new bool[width];
+    }
+
+
+    //read legge 1 char, ossia un byte di dati. un pixel è un bit quindi per fare un byte ne servono 8. per questo si divide per 8
+    int size = width*height/8;
+
+
+    bytes = new char[size];
     //LEGGE IL FILE E LO METTE IN bytes
     picture.read(bytes, size);
+    cout<<size;
 
     // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
     bool bits[width*height];
     //Per ogni byte estraiamo 8 bit
-    for(int k=0; k< sizeof(bytes); k++) {
+    for(int k=0; k< size; k++) {
         for (int h = 0; h < 8; h++) {
             bits[k * 8 + h] = (bytes[k] >> h) & 1;
         }
@@ -47,21 +97,23 @@ void Channel_1::loadImage(string filename) {
             pixels[i][j] = bits[(i*width)+j];
         }
     }
+
     picture.close();             //close the stream
 
-}
+    }
+
+
 
 void Channel_1::saveImage(string filename) {
     ofstream imageFile;
     imageFile.open(filename);
 
     // write the ppm header
-    imageFile << magic << endl << width << endl << height
-              << endl << to_string(max);// << endl;
+    imageFile << magic << endl << width << endl << height;// << endl;
 
 
     //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
-    imageFile.write(bytes,width*height);
+    imageFile.write(bytes,width*height/8);
     imageFile.close();          //close the stream
 
 }
