@@ -15,6 +15,7 @@
 #include "Image.h"
 #include "Channel_1.h"
 #include "Channels_3.h"
+#include "Channels_2.h"
 //*)
 
 class KernelImageGUiFrame: public wxFrame
@@ -58,7 +59,9 @@ private:
     wxTextCtrl* TextCtrl2;
     wxStaticText* StaticText1;
     Channel_1 i1;
+    Channels_2 i2;
     Channels_3 i3;
+    Image *i;
     //*)
 
 DECLARE_EVENT_TABLE()

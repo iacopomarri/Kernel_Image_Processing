@@ -134,8 +134,16 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     wxString s= TextCtrl1->GetValue();
     //converte in standard string
     std::string loadPath = s.ToStdString();
+    //check del tipo
+    string p=i->check(loadPath);
+    if (p=="P1" || p=="P4")
+        i=&i1;
+    else if(p=="P2" || p=="P5")
+        i=&i2;
+    else if(p=="P3" || p=="P6")
+        i=&i3;
     //carica l'immagine
-    i3.loadImage(loadPath);
+    i->loadImage(loadPath);
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
     }
@@ -146,7 +154,7 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     wxString s= TextCtrl2->GetValue();
     std::string savePath = s.ToStdString();
-    i3.saveImage(savePath);
+    i->saveImage(savePath);
 
 }
 

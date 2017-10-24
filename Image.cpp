@@ -21,6 +21,30 @@ void Image::setWidth(int w){this->width=w;}
 void Image::setMax(int m){this->max=m;}
 void Image::setMagic(string m) {this->magic = m;}
 
+
+string Image::check(string filename) {
+    ifstream picture;
+    picture.open(filename);                            //open the stream to the file
+    if (picture.fail()) {                              //check if che file it's been opened
+        cout << "Errore di caricamento" << endl;
+    }
+
+
+    //controlla se la riga letta  è un commento, in tal caso la salta
+    string a="";
+    bool flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+    }
+
+    return a;
+}
+
 //void Image::effect(int effectCode)
 /*{
     int NexternalCicle=(width-2)*(height-2);

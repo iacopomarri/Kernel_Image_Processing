@@ -19,6 +19,7 @@ public:
 
     virtual void loadImage(string filename)=0;
     virtual void saveImage(string filename)=0;
+    string check(string filename);
 
     int getHeight()const;
     int getWidth()const;
