@@ -6,10 +6,6 @@
 #define KERNELIMAGEPROCESSING_IMAGE_H
 
 #include <string>
-#include "Channel_1.h"
-#include "Channels_2.h"
-#include "Channels_3.h"
-#include "Channels_4.h"
 
 using namespace std;
 
@@ -17,20 +13,22 @@ class Image{
 public:
     Image();
     virtual ~Image();
-    Image(const Image& copy);
 
-    Image operator=(const Image&);
+    //Image(const Image& copy);
+    //Image operator=(const Image&);
 
-    void loadImage(string filename);
-    void saveImage(string filename);
+    virtual void loadImage(string filename)=0;
+    virtual void saveImage(string filename)=0;
 
     int getHeight()const;
     int getWidth()const;
     int getMax()const;
+    string getMagic() const;
+
     void setHeight(int h);
     void setWidth(int w);
     void setMax(int m);
-
+    void setMagic(string m);
 
 protected:
     string magic;
@@ -38,7 +36,8 @@ protected:
     int height;
     int max;
     char* bytes;
-    Channels_3* pixels;
+
+
 
 };
 

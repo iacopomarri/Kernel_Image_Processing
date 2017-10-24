@@ -8,6 +8,7 @@
 
 #include "KernelImageGUiMain.h"
 #include <wx/msgdlg.h>
+#include "Channels_2.h"
 
 //(*InternalHeaders(KernelImageGUiFrame)
 #include <wx/string.h>
@@ -109,6 +110,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
 Image immagine;
 
 
+Channels_2 immagine;
 
 KernelImageGUiFrame::~KernelImageGUiFrame()
 {

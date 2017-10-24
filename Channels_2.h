@@ -6,16 +6,17 @@
 #define KERNELIMAGEPROCESSING_CHANNELS_2_H
 
 
-class Channels_2 {
+#include "Image.h"
+
+class Channels_2: public Image {
 public:
     Channels_2();
-    Channels_2(char gr);
 
-    char getGR() const;
-    void setGR(char gr);
+    void loadImage(string filename)override;
+    void saveImage(string filename)override;
 
 private:
-    char gr;
+    char** pixels;
 
 };
 

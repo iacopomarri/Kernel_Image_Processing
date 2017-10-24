@@ -56,7 +56,6 @@ private:
     wxTextCtrl* TextCtrl2;
     wxStaticText* StaticText1;
     //*)
-    Image immagine;
 
 DECLARE_EVENT_TABLE()
 };
