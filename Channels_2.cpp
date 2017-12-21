@@ -1,6 +1,3 @@
-//
-// Created by Lorenzo De Luca on 16/10/17.
-//
 
 #include "Channels_2.h"
 #include <fstream>
@@ -16,8 +13,51 @@ void Channels_2::loadImage(string filename) {
         cout << "Errore di caricamento" << endl;
     }
 
-    picture >> Channels_2::magic >> Channels_2::height >> Channels_2::width >> Channels_2::max;
+    //controlla se la riga letta  è un commento, in tal caso la salta
+    string a="";
+    bool flag=false;
 
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        magic=a;
+    }
+
+    flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        width=atoi(a.c_str());
+    }
+
+    flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        height=atoi(a.c_str());
+    }
+
+    flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        max=atoi(a.c_str());
+    }
     cout<<magic<<endl;
     cout<<width<<endl;
     cout<<height<<endl;

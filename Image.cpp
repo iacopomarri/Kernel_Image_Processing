@@ -7,7 +7,7 @@
 #include <bitset>
 
 
-Image::Image():magic("nulla"),width(0),height(0),max(0){}
+Image::Image():magic("null"),width(0),height(0),max(0){}
 
 Image::~Image() { delete[] bytes; }
 
@@ -20,6 +20,45 @@ void Image::setHeight(int h){this->height=h;}
 void Image::setWidth(int w){this->width=w;}
 void Image::setMax(int m){this->max=m;}
 void Image::setMagic(string m) {this->magic = m;}
+
+
+string Image::check(string filename) {
+    ifstream picture;
+    picture.open(filename);                            //open the stream to the file
+    if (picture.fail()) {                              //check if che file it's been opened
+        cout << "Errore di caricamento" << endl;
+    }
+
+
+    //controlla se la riga letta  è un commento, in tal caso la salta
+    string a="";
+    bool flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+    }
+
+    return a;
+}
+
+//void Image::effect(int effectCode)
+/*{
+    int NexternalCicle=(width-2)*(height-2);
+
+
+    for(int i=0; i<NexternalCicle; i++)
+    {
+        int sum = 0;
+d        {
+            sharpen[j]*bytes[i]
+        }
+
+    }
+}*/
 
 
 /*void Image::loadImage(std::string filename  ) {
@@ -60,7 +99,7 @@ void Image::setMagic(string m) {this->magic = m;}
 
         for(int i=0; i<6000;i++){
 
-                cout<<i <<" : "<<"\t";
+                //cout<<i <<" : "<<"\t";
 
                 cout<<(unsigned int)pixels[i].getR()<<"\t";      bitset<8>x(pixels[i].getR());  cout<<x<<"\t";     cout<<pixels[i].getR()<<"\t\t\t";
                 cout<<(unsigned int)pixels[i].getG()<<"\t";      bitset<8>y(pixels[i].getG());  cout<<y<<"\t";     cout<<pixels[i].getG()<<"\t\t\t";
@@ -80,8 +119,8 @@ void Image::saveImage(std::string filename) {
         imageFile.open(filename);
 
         // write the ppm header
-        imageFile << "P6" << endl << width << endl << height
-        << endl << "255";// << endl;
+        imageFile << magic << endl << width<< endl << height
+        << endl << to_string(max);// << endl;
 
 
     //  SCRIVE IL CONTENUTO DI BYTES NEL FILE

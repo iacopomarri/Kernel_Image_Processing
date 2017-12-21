@@ -1,6 +1,3 @@
-//
-// Created by Lorenzo De Luca on 16/10/17.
-//
 
 #include "Channels_3.h"
 #include <fstream>
@@ -19,7 +16,51 @@ void Channels_3::loadImage(string filename) {
             cout << "Errore di caricamento" << endl;
         }
 
-        picture >> Channels_3::magic >> Channels_3::width >> Channels_3::height >> Channels_3::max;
+    //controlla se la riga letta  è un commento, in tal caso la salta
+    string a="";
+    bool flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        magic=a;
+    }
+
+    flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        width=atoi(a.c_str());
+    }
+
+    flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        height=atoi(a.c_str());
+    }
+
+    flag=false;
+
+    while(!flag) {
+        picture >> a;
+        if (a == "#")
+            std::getline(picture, a);
+        else
+            flag = true;
+        max=atoi(a.c_str());
+    }
 
 
 
@@ -29,11 +70,14 @@ void Channels_3::loadImage(string filename) {
         cout<<max<<endl;
 
 
+
         pixels = new Color*[width];         //  allocate memory for the pixels matrix
+        int size = width*height;
+
         for(int i=0; i<width;i++)
             pixels[i]=new Color[height];
 
-        int size = width*height;
+
 
         bytes = new char[size*3];
 
@@ -42,7 +86,7 @@ void Channels_3::loadImage(string filename) {
         picture.read(bytes, size*3);
 
 
-
+/*
         // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
         for (int i=0; i<height; i++)
             for(int j=0; j<width;j++) {
@@ -50,7 +94,7 @@ void Channels_3::loadImage(string filename) {
                 pixels[i][j].setG(bytes[(j * 3)+(i*width*3)]);
                 pixels[i][j].setB(bytes[(j * 3)+(i*width*3)]);
             }
-
+*/
 
         picture.close();             //close the stream
     }
