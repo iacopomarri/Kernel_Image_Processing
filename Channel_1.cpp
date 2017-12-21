@@ -35,16 +35,15 @@ void Channel_1::loadImage(string filename) {
 
     // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
     bool bits[width*height];
-    //Per ogni byte estraiamo 8 bit
-    for(int k=0; k< sizeof(bytes); k++) {
-        for (int h = 0; h < 8; h++) {
-            bits[k * 8 + h] = (bytes[k] >> h) & 1;
+    for(int k=0; k< sizeof(bytes); k++){
+        for(int h=0; h<8; h++){
+            bits[k*8+h]=(bytes[k] >> h) & 1;
         }
     }
 
     for (int i=0; i<height; i++){
         for(int j=0; j<width; j++) {
-            pixels[i][j] = bits[(i*width)+j];
+            pixels[i][j] = bytes[8*i];
         }
     }
     picture.close();             //close the stream
