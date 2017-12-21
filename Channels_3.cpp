@@ -63,7 +63,8 @@ void Channels_3::loadImage(string filename) {
     }
 
 
-
+        path=filename;      //mette il percorso dell'immagine nell'attributo path dell'oggetto immagine
+        cout<<path<<endl;
         cout<<magic<<endl;
         cout<<width<<endl;
         cout<<height<<endl;
@@ -114,4 +115,8 @@ void Channels_3::saveImage(string filename) {
     //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
     imageFile.write(bytes,width*height*3);
     imageFile.close(); //close the stream
+}
+
+
+void Channels_3::effect(float** e) {
 }

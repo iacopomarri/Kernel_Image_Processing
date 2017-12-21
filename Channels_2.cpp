@@ -58,6 +58,9 @@ void Channels_2::loadImage(string filename) {
             flag = true;
         max=atoi(a.c_str());
     }
+
+    path=filename;      //mette il percorso dell'immagine nell'attributo path dell'oggetto immagine
+    cout<<path<<endl;
     cout<<magic<<endl;
     cout<<width<<endl;
     cout<<height<<endl;
@@ -99,4 +102,20 @@ void Channels_2::saveImage(string filename) {
     imageFile.write(bytes,width*height);
     imageFile.close();          //close the stream
 
+}
+
+
+void Channels_2::effect(float** e) {
+    int sum;
+
+    for(int k=0; k<height-2;k++)
+        for(int h=0; h<width-2;h++){
+            sum =0;
+            for(int i=k;i<k+3;i++)
+                for(int j=h; j<h+3;j++)
+                    sum+=e[i][j]*pixels[i][j];
+            pixels[k][h]=sum;
+    width-=2;
+    height-=2;
+        }
 }

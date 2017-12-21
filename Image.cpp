@@ -7,7 +7,7 @@
 #include <bitset>
 
 
-Image::Image():magic("null"),width(0),height(0),max(0){}
+Image::Image():magic("null"),path(""),width(0),height(0),max(0){}
 
 Image::~Image() { delete[] bytes; }
 
@@ -45,20 +45,15 @@ string Image::check(string filename) {
     return a;
 }
 
-//void Image::effect(int effectCode)
-/*{
-    int NexternalCicle=(width-2)*(height-2);
+
+string Image::getPath() {return path;}
 
 
-    for(int i=0; i<NexternalCicle; i++)
-    {
-        int sum = 0;
-d        {
-            sharpen[j]*bytes[i]
-        }
 
-    }
-}*/
+
+
+
+
 
 
 /*void Image::loadImage(std::string filename  ) {
