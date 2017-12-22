@@ -1,7 +1,7 @@
 
 
 #include "KernelImageGUiMain.h"
-#include "Effect.h"
+
 #include <wx/msgdlg.h>
 #include "Channels_2.h"
 #include "Channels_3.h"
@@ -107,6 +107,9 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
 
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton1Click1);
     Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton2Click2);
+    Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton3Click);
+    Connect(ID_BUTTON4,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton4Click);
+    Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton5Click);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&KernelImageGUiFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&KernelImageGUiFrame::OnAbout);
 //    Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&KernelImageGUiFrame::OnClose1);
@@ -182,7 +185,6 @@ void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
 void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 {
     Button2->Enable(true);
-    Effect e= Effect();
     i->effect(e.getBlur());
     cout<<"caskdnajd";
 

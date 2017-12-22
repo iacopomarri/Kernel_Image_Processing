@@ -106,16 +106,23 @@ void Channels_2::saveImage(string filename) {
 
 
 void Channels_2::effect(float** e) {
-    int sum;
+    int sum, a, b;
 
     for(int k=0; k<height-2;k++)
-        for(int h=0; h<width-2;h++){
-            sum =0;
-            for(int i=k;i<k+3;i++)
-                for(int j=h; j<h+3;j++)
-                    sum+=e[i][j]*pixels[i][j];
-            pixels[k][h]=sum;
+        for(int h=0; h<width-2;h++) {
+            sum = 0;
+            a=0;
+            for (int i = k; i < k + 3; i++) {
+                b=0;
+                for (int j = h; j < h + 3; j++) {
+                    sum += e[a][b] * pixels[i][j];
+                    b++;
+                }
+                a++;
+            }
+            pixels[k][h] = sum;
+        }
     width-=2;
     height-=2;
-        }
 }
+

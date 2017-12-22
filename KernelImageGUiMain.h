@@ -16,6 +16,7 @@
 #include "Channel_1.h"
 #include "Channels_3.h"
 #include "Channels_2.h"
+#include "Effect.h"
 //*)
 
 class KernelImageGUiFrame: public wxFrame
@@ -72,6 +73,7 @@ private:
     Channels_2 i2;
     Channels_3 i3;
     Image *i;
+    Effect e= Effect();
     //*)
 
 DECLARE_EVENT_TABLE()
