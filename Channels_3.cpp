@@ -82,7 +82,6 @@ void Channels_3::loadImage(string filename) {
 
         bytes = new char[size*3];
 
-
         //LEGGE IL FILE E LO METTE IN bytes
         picture.read(bytes, size*3);
 

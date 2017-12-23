@@ -10,9 +10,15 @@ class Effect {
 public:
     Effect();
     float** getBlur();
+    float** getSharpen();
+    float** getTopsobel();
+    float** getEdgedetection();
 
 private:
     float** blur;
+    float** sharpen;
+    float**topsobel;
+    float** edgedetection;
 
 };
 

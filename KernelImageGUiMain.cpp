@@ -142,6 +142,7 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 
 {
     //attiva il pulsante salva
+    Button2->Enable(true);
     Button3->Enable(true);
     Button4->Enable(true);
     Button5->Enable(true);
@@ -184,19 +185,17 @@ void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
 
 void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 {
-    Button2->Enable(true);
-    i->effect(e.getBlur());
-    cout<<"caskdnajd";
 
+    i->effect(e.getBlur());
 }
 
 void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
 {
-    cout<<"asdamjsndasnnn1";
+    i->effect(e.getTopsobel());
 }
 
 void KernelImageGUiFrame::OnButton5Click(wxCommandEvent& event)
 {
-    cout<<"asdamssd";
+    i->effect(e.getEdgedetection());
 }
 
