@@ -1,6 +1,5 @@
-
-
 #include "KernelImageGUiMain.h"
+
 #include <wx/msgdlg.h>
 #include "Channels_2.h"
 #include "Channels_3.h"
@@ -48,6 +47,9 @@ wxString wxbuildinfo(wxbuildinfoformat format)
 //(*IdInit(KernelImageGUiFrame)
 const long KernelImageGUiFrame::ID_BUTTON1 = wxNewId();
 const long KernelImageGUiFrame::ID_BUTTON2 = wxNewId();
+const long KernelImageGUiFrame::ID_BUTTON3 = wxNewId();
+const long KernelImageGUiFrame::ID_BUTTON4 = wxNewId();
+const long KernelImageGUiFrame::ID_BUTTON5 = wxNewId();
 const long KernelImageGUiFrame::ID_TEXTCTRL1 = wxNewId();
 const long KernelImageGUiFrame::ID_TEXTCTRL2 = wxNewId();
 const long KernelImageGUiFrame::ID_STATICTEXT1 = wxNewId();
@@ -73,9 +75,12 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
     Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
     SetClientSize(wxSize(737,463));
     Button1 = new wxButton(this, ID_BUTTON1, _("Load"), wxPoint(112,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
-    Button2 = new wxButton(this, ID_BUTTON2, _("Save"), wxPoint(112,272), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
+    Button2 = new wxButton(this, ID_BUTTON2, _("Save"), wxPoint(112,320), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
+    Button3 = new wxButton(this, ID_BUTTON3, _("Blur"), wxPoint(162,200), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON3"));
+    Button4 = new wxButton(this, ID_BUTTON4, _("Sharpen"), wxPoint(310,200), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON4"));
+    Button5 = new wxButton(this, ID_BUTTON5, _("Edge Detection"), wxPoint(458,200), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON5"));
     TextCtrl1 = new wxTextCtrl(this, ID_TEXTCTRL1, _("File Path"), wxPoint(260,64), wxSize(400,-1), 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
-    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, _("File Path"), wxPoint(260,272), wxSize(400,-1), 0, wxDefaultValidator, _T("ID_TEXTCTRL2"));
+    TextCtrl2 = new wxTextCtrl(this, ID_TEXTCTRL2, _("File Path"), wxPoint(260,320), wxSize(400,-1), 0, wxDefaultValidator, _T("ID_TEXTCTRL2"));
     StaticText1 = new wxStaticText(this, ID_STATICTEXT1, _("Loaded path: None"), wxPoint(260,100), wxDefaultSize, 0, _T("ID_STATICTEXT1"));
     MenuBar1 = new wxMenuBar();
     Menu1 = new wxMenu();
@@ -94,9 +99,15 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
     StatusBar1->SetStatusStyles(1,__wxStatusBarStyles_1);
     SetStatusBar(StatusBar1);
     Button2->Enable(false);
+    Button3->Enable(false);
+    Button4->Enable(false);
+    Button5->Enable(false);
 
     Connect(ID_BUTTON1,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton1Click1);
     Connect(ID_BUTTON2,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton2Click2);
+    Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton3Click);
+    Connect(ID_BUTTON4,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton4Click);
+    Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&KernelImageGUiFrame::OnButton5Click);
     Connect(ID_MENUITEM1,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&KernelImageGUiFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&KernelImageGUiFrame::OnAbout);
 //    Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&KernelImageGUiFrame::OnClose1);
@@ -130,10 +141,18 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 {
     //attiva il pulsante salva
     Button2->Enable(true);
+    Button3->Enable(true);
+    Button4->Enable(true);
+    Button5->Enable(true);
     //prende il testo nella casella del percorso da caricare
     wxString s= TextCtrl1->GetValue();
     //converte in standard string
     std::string loadPath = s.ToStdString();
+
+    TextCtrl2->Clear();
+    TextCtrl2->AppendText(loadPath);
+
+
     //check del tipo
     string p=i->check(loadPath);
     if (p=="P1" || p=="P4")
@@ -146,9 +165,13 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     i->loadImage(loadPath);
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
-    }
 
-            //          /home/iacopo/Desktop/immagini/MARBLES.PBM
+
+}
+
+
+
+//          /home/iacopo/Desktop/immagini/MARBLES.PBM
 
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
@@ -158,3 +181,18 @@ void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
 
 }
 
+void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
+{
+
+    i->effect(e.getBlur());
+}
+
+void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
+{
+    i->effect(e.getTopsobel());
+}
+
+void KernelImageGUiFrame::OnButton5Click(wxCommandEvent& event)
+{
+    i->effect(e.getEdgedetection());
+}
