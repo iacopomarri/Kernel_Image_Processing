@@ -1,10 +1,9 @@
-//
-// Created by iacopo on 19/10/16.
-//
+
 
 #include "KernelImageGUiMain.h"
 #include <wx/msgdlg.h>
 #include "Channels_2.h"
+#include "Channels_3.h"
 #include "Channel_1.h"
 
 //(*InternalHeaders(KernelImageGUiFrame)
@@ -32,8 +31,6 @@ wxString wxbuildinfo(wxbuildinfoformat format)
     {
 #if defined(__WXMSW__)
         wxbuild << _T("-Windows");
-#elif defined(__WXMAC__)
-        wxbuild << _T("-Mac");
 #elif defined(__UNIX__)
         wxbuild << _T("-Linux");
 #endif
@@ -64,7 +61,7 @@ BEGIN_EVENT_TABLE(KernelImageGUiFrame,wxFrame)
                 //*)
 END_EVENT_TABLE()
 
-KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id) : wxFrame(parent, wxID_ANY, _T("TITOLO"), wxDefaultPosition, wxDefaultSize)
+KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
 {
     //(*Initialize(KernelImageGUiFrame)
     wxMenuItem* MenuItem2;
@@ -73,7 +70,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id) : wxFra
     wxMenuBar* MenuBar1;
     wxMenu* Menu2;
 
-    //Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
+    Create(parent, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, _T("wxID_ANY"));
     SetClientSize(wxSize(737,463));
     Button1 = new wxButton(this, ID_BUTTON1, _("Load"), wxPoint(112,64), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON1"));
     Button2 = new wxButton(this, ID_BUTTON2, _("Save"), wxPoint(112,272), wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
@@ -109,7 +106,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id) : wxFra
 
 
 
-Channel_1 immagine;
+
 
 KernelImageGUiFrame::~KernelImageGUiFrame()
 {
@@ -149,9 +146,9 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     i->loadImage(loadPath);
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
-}
+    }
 
-//          /home/iacopo/Desktop/immagini/MARBLES.PBM
+            //          /home/iacopo/Desktop/immagini/MARBLES.PBM
 
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {

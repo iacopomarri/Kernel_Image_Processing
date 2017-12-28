@@ -19,11 +19,15 @@ public:
 
     virtual void loadImage(string filename)=0;
     virtual void saveImage(string filename)=0;
+    virtual void effect(float** e)=0;
     string check(string filename);
+
+
 
     int getHeight()const;
     int getWidth()const;
     int getMax()const;
+    string getPath();
     string getMagic() const;
 
     void setHeight(int h);
@@ -33,6 +37,7 @@ public:
 
 protected:
     string magic;
+    string path;
     int width;
     int height;
     int max;

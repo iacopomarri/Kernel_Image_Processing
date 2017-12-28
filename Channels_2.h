@@ -14,6 +14,8 @@ public:
 
     void loadImage(string filename)override;
     void saveImage(string filename)override;
+    void effect(float** e);
+
 
 private:
     char** pixels;

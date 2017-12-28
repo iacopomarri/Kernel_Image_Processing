@@ -61,8 +61,8 @@ void Channels_4::loadImage(string filename) {
         max=atoi(a.c_str());
     }
 
-
-
+    path=filename;
+    cout<<path<<endl;
     cout<<magic<<endl;
     cout<<width<<endl;
     cout<<height<<endl;
@@ -109,4 +109,7 @@ void Channels_4::saveImage(string filename) {
     //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
     imageFile.write(bytes,width*height*4);
     imageFile.close(); //close the stream
+}
+
+void Channels_4::effect(float** e) {
 }

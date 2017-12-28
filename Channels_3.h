@@ -14,6 +14,8 @@ class Channels_3: public Image {
 
         void loadImage(string filename)override ;
         void saveImage(string filename)override ;
+    void effect(float** e);
+
 
     private:
         Color** pixels;

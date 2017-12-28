@@ -61,10 +61,12 @@ void Channel_1::loadImage(string filename) {
 
 
 
-
+    path=filename;      //mette il percorso dell'immagine nell'attributo path dell'oggetto immagine
+    cout<<path<<endl;
     cout<<magic<<endl;
     cout<<width<<endl;
     cout<<height<<endl;
+    cout<<path;
 
 
     pixels = new bool*[height]; //  allocate memory for the pixels matrix
@@ -117,3 +119,7 @@ void Channel_1::saveImage(string filename) {
     imageFile.close();          //close the stream
 
 }
+
+void Channel_1::effect(float** e) {
+}
+

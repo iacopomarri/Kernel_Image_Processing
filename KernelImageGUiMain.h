@@ -16,6 +16,7 @@
 #include "Channel_1.h"
 #include "Channels_3.h"
 #include "Channels_2.h"
+#include "Effect.h"
 //*)
 
 class KernelImageGUiFrame: public wxFrame
@@ -36,13 +37,20 @@ private:
 //        void OnFilePickerCtrl1FileChanged2(wxFileDirPickerEvent& event);
     void OnClose1(wxCloseEvent& event);
 //        void OnDirPickerCtrl1DirChanged(wxFileDirPickerEvent& event);
+    void OnButton5Click(wxCommandEvent& event);
+    void OnButton4Click(wxCommandEvent& event);
+    void OnButton3Click(wxCommandEvent& event);
     void OnButton2Click2(wxCommandEvent& event);
     void OnButton1Click1(wxCommandEvent& event);
+
     //*)
 
     //(*Identifiers(KernelImageGUiFrame)
     static const long ID_BUTTON1;
     static const long ID_BUTTON2;
+    static const long ID_BUTTON3;
+    static const long ID_BUTTON4;
+    static const long ID_BUTTON5;
     static const long ID_TEXTCTRL1;
     static const long ID_TEXTCTRL2;
     static const long ID_STATICTEXT1;
@@ -55,6 +63,9 @@ private:
     wxStatusBar* StatusBar1;
     wxButton* Button1;
     wxButton* Button2;
+    wxButton* Button3;
+    wxButton* Button4;
+    wxButton* Button5;
     wxTextCtrl* TextCtrl1;
     wxTextCtrl* TextCtrl2;
     wxStaticText* StaticText1;
@@ -62,6 +73,7 @@ private:
     Channels_2 i2;
     Channels_3 i3;
     Image *i;
+    Effect e= Effect();
     //*)
 
 DECLARE_EVENT_TABLE()
