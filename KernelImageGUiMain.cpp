@@ -169,11 +169,6 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 
 }
 
-
-
-//          /home/iacopo/Desktop/immagini/MARBLES.PBM
-
-
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     wxString s= TextCtrl2->GetValue();
     std::string savePath = s.ToStdString();
