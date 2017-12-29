@@ -14,8 +14,8 @@
 #include <wx/stattext.h>
 #include "Image.h"
 #include "OneChannel.h"
-#include "Channels_3.h"
-#include "Channels_2.h"
+#include "ThreeChannels.h"
+#include "TwoChannels.h"
 #include "Effect.h"
 //*)
 

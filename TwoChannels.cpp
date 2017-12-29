@@ -1,5 +1,5 @@
 
-#include "Channels_2.h"
+#include "TwoChannels.h"
 #include <fstream>
 #include <iostream>
 #include <bitset>
@@ -163,8 +163,6 @@ void Channels_2::effect(float** e) {
         for(int j=0; j<width;j++)
             bytes[i*width+j]=pixels[i][j];
 
-   /* for(int i=0; i<10;i++)
-        cout<<(int)bytes[i];*/
 
     // /home/iacopo/Desktop/immagini/aaa.pgm
 }

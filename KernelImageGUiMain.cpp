@@ -3,8 +3,8 @@
 #include "KernelImageGUiMain.h"
 
 #include <wx/msgdlg.h>
-#include "Channels_2.h"
-#include "Channels_3.h"
+#include "TwoChannels.h"
+#include "ThreeChannels.h"
 #include "OneChannel.h"
 
 //(*InternalHeaders(KernelImageGUiFrame)

@@ -1,5 +1,5 @@
 
-#include "Channels_3.h"
+#include "ThreeChannels.h"
 #include <fstream>
 #include <iostream>
 #include <bitset>
