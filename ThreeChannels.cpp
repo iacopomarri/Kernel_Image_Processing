@@ -6,9 +6,9 @@
 
 
 
-Channels_3::Channels_3():Image(){}
+ThreeChannels::ThreeChannels():Image(){}
 
-void Channels_3::loadImage(string filename) {
+void ThreeChannels::loadImage(string filename) {
 
         ifstream picture;
         picture.open(filename);                            //open the stream to the file
@@ -100,7 +100,7 @@ void Channels_3::loadImage(string filename) {
     }
 
 
-void Channels_3::saveImage(string filename) {
+void ThreeChannels::saveImage(string filename) {
 
 
     ofstream imageFile;
@@ -117,7 +117,7 @@ void Channels_3::saveImage(string filename) {
 }
 
 
-void Channels_3::effect(float** e) {
+void ThreeChannels::effect(float** e) {
         float sumR,sumG, sumB;
         int a, b;
 

@@ -2,15 +2,15 @@
 // Created by Lorenzo De Luca on 16/10/17.
 //
 
-#ifndef KERNELIMAGEPROCESSING_CHANNELS_2_H
-#define KERNELIMAGEPROCESSING_CHANNELS_2_H
+#ifndef KERNELIMAGEPROCESSING_TWOCHANNELS_H
+#define KERNELIMAGEPROCESSING_TWOCHANNELS_H
 
 
 #include "Image.h"
 
-class Channels_2: public Image {
+class TwoChannels: public Image {
 public:
-    Channels_2();
+    TwoChannels();
 
     void loadImage(string filename)override;
     void saveImage(string filename)override;

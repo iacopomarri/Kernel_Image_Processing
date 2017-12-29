@@ -8,10 +8,10 @@
 #include <string>
 #include "Image.h"
 
-class Channel_1: public Image {
+class OneChannel: public Image {
 public:
-    Channel_1();
-    ~Channel_1();
+    OneChannel();
+    ~OneChannel();
 
     void loadImage(string filename)override;
     void saveImage(string filename)override;

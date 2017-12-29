@@ -5,16 +5,16 @@
 #include <iostream>
 #include <bitset>
 
-Channel_1::Channel_1():Image(){}
+OneChannel::OneChannel():Image(){}
 
-Channel_1::~Channel_1(){
+OneChannel::~OneChannel(){
     for(int i = 0; i < width; ++i) {
         delete [] pixels[i];
     }
     delete [] pixels;
 };
 
-void Channel_1::loadImage(string filename) {
+void OneChannel::loadImage(string filename) {
     ifstream picture;
     picture.open(filename);                            //open the stream to the file
     if (picture.fail()) {                              //check if che file it's been opened
@@ -106,7 +106,7 @@ void Channel_1::loadImage(string filename) {
 
 
 
-void Channel_1::saveImage(string filename) {
+void OneChannel::saveImage(string filename) {
     ofstream imageFile;
     imageFile.open(filename);
 
@@ -120,6 +120,6 @@ void Channel_1::saveImage(string filename) {
 
 }
 
-void Channel_1::effect(float** e) {
+void OneChannel::effect(float** e) {
 }
 
