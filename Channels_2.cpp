@@ -165,5 +165,6 @@ void Channels_2::effect(float** e) {
 
     for(int i=0; i<10;i++)
         cout<<(int)bytes[i];
+
 }
 
