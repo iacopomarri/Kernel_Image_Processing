@@ -1,5 +1,5 @@
 
-#include "Channels_2.h"
+#include "TwoChannels.h"
 #include <fstream>
 #include <iostream>
 #include <bitset>
@@ -108,19 +108,19 @@ void Channels_2::saveImage(string filename) {
 void Channels_2::effect(float** e) {
     float sum;
     int a, b;
-    cout<<endl<<(int)(unsigned char)bytes[1]<<endl;
+  /*  cout<<endl<<(int)(unsigned char)bytes[1]<<endl;
     cout<<endl<<(int)(unsigned char)bytes[2]<<endl;
     cout<<endl<<(unsigned char)bytes[2]<<endl;
+*/
 
 
 
-
-    cout<<"9 elementi di pixels prima di blur"<<endl;
+   /* cout<<"9 elementi di pixels prima di blur"<<endl;
     for(int i=0; i<3;i++)
         for(int j=0; j<3;j++)
             cout<<(int)(unsigned char)pixels[i][j]<<endl;
 
-
+*/
 
 
 
@@ -163,8 +163,6 @@ void Channels_2::effect(float** e) {
         for(int j=0; j<width;j++)
             bytes[i*width+j]=pixels[i][j];
 
-    for(int i=0; i<10;i++)
-        cout<<(int)bytes[i];
 
 }
 
