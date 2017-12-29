@@ -1,16 +1,16 @@
 //
 // Created by Lorenzo De Luca on 16/10/17.
 //
-#ifndef KERNELIMAGEPROCESSING_CHANNELS_3_H
-#define KERNELIMAGEPROCESSING_CHANNELS_3_H
+#ifndef KERNELIMAGEPROCESSING_THREECHANNELS_H
+#define KERNELIMAGEPROCESSING_THREECHANNELS_H
 
 #include <string>
 #include "Color.h"
 #include "Image.h"
 
-class Channels_3: public Image {
+class ThreeChannels: public Image {
     public:
-        Channels_3();
+        ThreeChannels();
 
         void loadImage(string filename)override ;
         void saveImage(string filename)override ;

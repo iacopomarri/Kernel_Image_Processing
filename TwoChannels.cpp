@@ -4,9 +4,10 @@
 #include <iostream>
 #include <bitset>
 
-Channels_2::Channels_2():Image(){}
 
-void Channels_2::loadImage(string filename) {
+TwoChannels::TwoChannels():Image(){}
+
+void TwoChannels::loadImage(string filename) {
     ifstream picture;
     picture.open(filename);                            //open the stream to the file
     if (picture.fail()) {                              //check if che file it's been opened
@@ -89,7 +90,7 @@ void Channels_2::loadImage(string filename) {
 
 }
 
-void Channels_2::saveImage(string filename) {
+void TwoChannels::saveImage(string filename) {
     ofstream imageFile;
     imageFile.open(filename);
 
@@ -105,7 +106,7 @@ void Channels_2::saveImage(string filename) {
 }
 
 
-void Channels_2::effect(float** e) {
+void TwoChannels::effect(float** e) {
     float sum;
     int a, b;
   /*  cout<<endl<<(int)(unsigned char)bytes[1]<<endl;

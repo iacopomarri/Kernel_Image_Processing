@@ -4,10 +4,10 @@
 #include <iostream>
 #include <bitset>
 
-Channels_4::Channels_4():Image(){}
+FourChannels::FourChannels():Image(){}
 
 
-void Channels_4::loadImage(string filename) {
+void FourChannels::loadImage(string filename) {
 
     ifstream picture;
     picture.open(filename);                            //open the stream to the file
@@ -97,7 +97,7 @@ void Channels_4::loadImage(string filename) {
 }
 
 
-void Channels_4::saveImage(string filename) {
+void FourChannels::saveImage(string filename) {
     ofstream imageFile;
     imageFile.open(filename);
 
@@ -111,5 +111,5 @@ void Channels_4::saveImage(string filename) {
     imageFile.close(); //close the stream
 }
 
-void Channels_4::effect(float** e) {
+void FourChannels::effect(float** e) {
 }
