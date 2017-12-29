@@ -1,6 +1,6 @@
 
 
-#include "Channel_1.h"
+#include "OneChannel.h"
 #include <fstream>
 #include <iostream>
 #include <bitset>

@@ -13,7 +13,7 @@
 #include <wx/textctrl.h>
 #include <wx/stattext.h>
 #include "Image.h"
-#include "Channel_1.h"
+#include "OneChannel.h"
 #include "Channels_3.h"
 #include "Channels_2.h"
 #include "Effect.h"

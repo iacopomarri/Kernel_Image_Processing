@@ -13,12 +13,14 @@ public:
     float** getSharpen();
     float** getTopsobel();
     float** getEdgedetection();
+    float** getIdentity();
 
 private:
     float** blur;
     float** sharpen;
     float**topsobel;
     float** edgedetection;
+    float** identity;
 
 };
 

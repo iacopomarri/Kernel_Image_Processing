@@ -5,7 +5,7 @@
 #include <wx/msgdlg.h>
 #include "Channels_2.h"
 #include "Channels_3.h"
-#include "Channel_1.h"
+#include "OneChannel.h"
 
 //(*InternalHeaders(KernelImageGUiFrame)
 #include <wx/string.h>
@@ -191,7 +191,7 @@ void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 
 void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
 {
-    i->effect(e.getTopsobel());
+    i->effect(e.getSharpen());
 }
 
 void KernelImageGUiFrame::OnButton5Click(wxCommandEvent& event)

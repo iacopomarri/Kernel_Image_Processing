@@ -5,12 +5,14 @@ Effect::Effect() {
     sharpen = new float*[3];
     topsobel = new float*[3];
     edgedetection= new float*[3];
+    identity = new float*[3];
 
     for(int i=0; i<3; i++) {
         blur[i] = new float[3];
         sharpen[i] = new float[3];
         topsobel[i] = new float[3];
         edgedetection[i]=new float[3];
+        identity[i]=new float[3];
     }
 
     blur[0][0]=0.0625;
@@ -54,9 +56,20 @@ Effect::Effect() {
     edgedetection[2][0]=-1;
     edgedetection[2][1]=-1;
     edgedetection[2][2]=-1;
+
+    identity[0][0]=0;
+    identity[0][1]=0;
+    identity[0][2]=0;
+    identity[1][0]=0;
+    identity[1][1]=1;
+    identity[1][2]=0;
+    identity[2][0]=0;
+    identity[2][1]=0;
+    identity[2][2]=0;
 }
 
 float** Effect::getBlur() { return blur;}
 float** Effect::getSharpen() {return sharpen;}
 float** Effect::getTopsobel() {return topsobel;}
 float** Effect::getEdgedetection() {return edgedetection;}
+float** Effect::getIdentity() {return identity;}
