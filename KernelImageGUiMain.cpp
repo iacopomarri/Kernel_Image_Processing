@@ -3,21 +3,12 @@
 #include "KernelImageGUiMain.h"
 
 #include <wx/msgdlg.h>
-#include "TwoChannels.h"
-#include "ThreeChannels.h"
-#include "OneChannel.h"
-
 //(*InternalHeaders(KernelImageGUiFrame)
-#include <wx/string.h>
-#include <wx/intl.h>
+
 #include <wx/log.h>
 //*)
-#include "Image.h"
-#include <wx/msgdlg.h>
 
-//(*InternalHeaders(KernelImageGUiFrame)
-#include <wx/string.h>
-#include <wx/intl.h>
+//(*InternalHeaders(KernelImageGUiFrame
 //*)
 
 //helper functions
@@ -156,7 +147,7 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 
 
     //check del tipo
-    string p=i->check(loadPath);
+    string p=i->magicCheck(loadPath);
     if (p=="P1" || p=="P4")
         i=&i1;
     else if(p=="P2" || p=="P5")
@@ -173,7 +164,6 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 
 
 
-            //          /home/iacopo/Desktop/immagini/MARBLES.PBM
 
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {

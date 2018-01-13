@@ -2,7 +2,6 @@
 // Created by iacopo on 12/10/16.
 //
 #include "Image.h"
-#include <fstream>
 #include <iostream>
 #include <bitset>
 
@@ -22,7 +21,63 @@ void Image::setMax(int m){this->max=m;}
 void Image::setMagic(string m) {this->magic = m;}
 
 
-string Image::check(string filename) {
+//controlla se la riga letta  è un commento, in tal caso la salta
+//il tutto è ripetuto 1 volta per ogni attributo; per fare tutto in un unico ciclo
+//è necessario cambiare la struttura della classe usando un vettore al posto dei singoli
+//attributi, e di conseguenza vanno cambiate diverse cose nel programma
+
+void Image::commentCheck(ifstream* picture) {
+    string byteToCheck = "";
+    bool isComment = false;
+
+    while (!isComment) {
+        *picture >> byteToCheck;
+        if (byteToCheck == "#")
+            std::getline(*picture, byteToCheck);
+        else
+            isComment = true;
+        magic = byteToCheck;
+    }
+
+    isComment = false;
+
+    while (!isComment) {
+        *picture >> byteToCheck;
+        if (byteToCheck == "#")
+            std::getline(*picture, byteToCheck);
+        else
+            isComment = true;
+        //a va convertito in intero
+        width = atoi(byteToCheck.c_str());
+    }
+
+    isComment = false;
+
+    while (!isComment) {
+        *picture >> byteToCheck;
+        if (byteToCheck == "#")
+            std::getline(*picture, byteToCheck);
+        else
+            isComment = true;
+        height = atoi(byteToCheck.c_str());
+    }
+
+    isComment = false;
+
+    if (magic != "P1" or magic != "P4") {
+        while (!isComment) {
+            *picture >> byteToCheck;
+            if (byteToCheck == "#")
+               std::getline(*picture, byteToCheck);
+            else
+                isComment = true;
+            max = atoi(byteToCheck.c_str());
+        }
+    }
+}
+
+
+string Image::magicCheck(string filename) {
     ifstream picture;
     picture.open(filename);                            //open the stream to the file
     if (picture.fail()) {                              //check if che file it's been opened
@@ -49,82 +104,7 @@ string Image::check(string filename) {
 string Image::getPath() {return path;}
 
 
-
-
-
-
-
-
-
-/*void Image::loadImage(std::string filename  ) {
-        ifstream picture;
-        picture.open(filename);                            //open the stream to the file
-        if (picture.fail()) {                              //check if che file it's been opened
-                cout << "Errore di caricamento" << endl;
-        }
-
-        picture >> Image::magic >> Image::width >> Image::height >> Image::max;
-
-        cout<<magic<<endl;
-        cout<<width<<endl;
-        cout<<height<<endl;
-        cout<<max<<endl;
-
-        pixels = new Color[width*height];       //  allocate memory for the pixels array
-        int size = width*height;
-
-        bytes = new char[size*3];
-
-
-        //LEGGE IL FILE E LO METTE IN bytes
-        picture.read(bytes, size*3);
-
-
-
-        // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
-        for (int i=0; i<size; i++)
-        {
-                pixels[i].setR(bytes[i*3]);
-                pixels[i].setG(bytes[i*3+1]);
-                pixels[i].setB(bytes[i*3+2]);
-        }
-
-
-        //STAMPA SOLO TOT PIXELS CHE SENNO SI IMPALLA
-
-        for(int i=0; i<6000;i++){
-
-                //cout<<i <<" : "<<"\t";
-
-                cout<<(unsigned int)pixels[i].getR()<<"\t";      bitset<8>x(pixels[i].getR());  cout<<x<<"\t";     cout<<pixels[i].getR()<<"\t\t\t";
-                cout<<(unsigned int)pixels[i].getG()<<"\t";      bitset<8>y(pixels[i].getG());  cout<<y<<"\t";     cout<<pixels[i].getG()<<"\t\t\t";
-                cout<<(unsigned int)pixels[i].getB()<<"\t";      bitset<8>z(pixels[i].getB());  cout<<z<<"\t";     cout<<pixels[i].getB()<<"\t\t\t"<<endl;
-
-        }
-
-
-        picture.close();             //close the stream
-}
-
-
-
-void Image::saveImage(std::string filename) {
-
-        ofstream imageFile;
-        imageFile.open(filename);
-
-        // write the ppm header
-        imageFile << magic << endl << width<< endl << height
-        << endl << to_string(max);// << endl;
-
-
-    //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
-       imageFile.write(bytes,width*height*3);
-        imageFile.close();          //close the stream
-
-}
-
-
+/*
 Image Image::operator=(const Image& other)
 {
         height = other.height;

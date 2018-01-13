@@ -1,6 +1,3 @@
-//
-// Created by Lorenzo De Luca on 16/10/17.
-//
 
 #ifndef KERNELIMAGEPROCESSING_TWOCHANNELS_H
 #define KERNELIMAGEPROCESSING_TWOCHANNELS_H

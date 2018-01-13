@@ -1,6 +1,5 @@
 
 #include "ThreeChannels.h"
-#include <fstream>
 #include <iostream>
 #include <bitset>
 
@@ -9,61 +8,19 @@
 ThreeChannels::ThreeChannels():Image(){}
 
 void ThreeChannels::loadImage(string filename) {
-
         ifstream picture;
-        picture.open(filename);                            //open the stream to the file
-        if (picture.fail()) {                              //check if che file it's been opened
+
+        //open the stream to the file
+        picture.open(filename);
+
+        //check if che file it's been opened
+        if (picture.fail()) {
             cout << "Errore di caricamento" << endl;
         }
 
-    //controlla se la riga letta  è un commento, in tal caso la salta
-    string a="";
-    bool flag=false;
+        this->commentCheck(&picture);
 
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        magic=a;
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        width=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        height=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        max=atoi(a.c_str());
-    }
-
-
-        path=filename;      //mette il percorso dell'immagine nell'attributo path dell'oggetto immagine
+        path=filename;
         cout<<path<<endl;
         cout<<magic<<endl;
         cout<<width<<endl;
@@ -71,23 +28,23 @@ void ThreeChannels::loadImage(string filename) {
         cout<<max<<endl;
 
 
-
-        pixels = new Color*[width];         //  allocate memory for the pixels matrix
-        int size = width*height;
-
+        //allocate memory for the pixels matrix
+        pixels = new Color*[width];
         for(int i=0; i<width;i++)
             pixels[i]=new Color[height];
 
+        //dimensione in bytes dell'immagine
+        int size = width*height*3;
 
 
-        bytes = new char[size*3];
+        //alloca memoria per bytes
+        bytes = new char[size];
 
-        //LEGGE IL FILE E LO METTE IN bytes
-        picture.read(bytes, size*3);
+        //legge il file e lo mette in bytes
+        picture.read(bytes, size);
 
 
-
-       //  METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
+       //mette in pixels i valori immagazzinati in bytes
         for (int i=0; i<height; i++)
             for(int j=0; j<width;j++) {
                 pixels[i][j].setR(bytes[3*i*width+3*j]);
@@ -95,8 +52,7 @@ void ThreeChannels::loadImage(string filename) {
                 pixels[i][j].setB(bytes[3*i*width+3*j+2]);
             }
 
-
-        picture.close();             //close the stream
+        picture.close();
     }
 
 
@@ -108,17 +64,20 @@ void ThreeChannels::saveImage(string filename) {
 
     // write the ppm header
     imageFile << magic << endl << width<< endl << height
-              << endl << to_string(max);// << endl;
+              << endl << to_string(max) << endl;
 
 
-    //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
+    //scrive il contenuto di bytes nel file
     imageFile.write(bytes,width*height*3);
-    imageFile.close(); //close the stream
+    imageFile.close();
 }
 
+//i valori R G e B dei pixels di ogni sottomatrice 3x3 vengono moltiplicati per il rispettivo valore della matrice kernel e sommati
+//tra loro per colore, così da ottenere sumR sumG e sumB, che formano i valore R G B del nuovo pixel
 
 void ThreeChannels::effect(float** e) {
         float sumR,sumG, sumB;
+        //parametri usati per indicizzare la matrice kernel 3x3 dell'effetto usato
         int a, b;
 
 
@@ -141,44 +100,33 @@ void ThreeChannels::effect(float** e) {
                 }
 
                 //inseriti controlli per evitare pixels di valori superiori a 255.
+                //da risolvere il problema che alcuni suerano 255
 
                 pixels[k][h].setR(sumR);
                 if(sumR>255)    pixels[k][h].setR(255);
 
-                    //cout<<endl<<sumR<<endl;
                 pixels[k][h].setG(sumG);
                 if(sumG>255) pixels[k][h].setG(255);
-                    //cout<<endl<<sumG<<endl;
 
                 pixels[k][h].setB(sumB);
                 if(sumB>255)  pixels[k][h].setB(255);
-                    //cout<<endl<<sumB<<endl;
 
             }
+
+        //le dimensioni dell'immagine si riducono di 2 in seguito alla convoluione
         width-=2;
         height-=2;
 
+        //reinstanzia bytes con le nuove dimensioni
         bytes = new char[3*width*height];
-        bytes[0]='\n';
-
-        cout<<endl;
-        cout<<path<<endl;
-        cout<<magic<<endl;
-        cout<<width<<endl;
-        cout<<height<<endl;
-        cout<<max<<endl;
+        //bytes[0]='\n';
 
 
-        cout<<endl;
-
+        //mette la nuova immagine in bytes per essere salvata
         for(int i=1; i<height;i++)
             for(int j=0; j<width;j++) {
                 bytes[3*i * width + 3*j] = pixels[i][j].getR();
                 bytes[3*i* width + 3*j+1] = pixels[i][j].getG();
                 bytes[3*i * width + 3*j+2] = pixels[i][j].getB();
-
-                }
-
-        // /home/iacopo/Desktop/immagini/aaa.pgm
-
+            }
 }

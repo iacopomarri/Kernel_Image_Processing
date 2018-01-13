@@ -9,121 +9,65 @@ TwoChannels::TwoChannels():Image(){}
 
 void TwoChannels::loadImage(string filename) {
     ifstream picture;
-    picture.open(filename);                            //open the stream to the file
-    if (picture.fail()) {                              //check if che file it's been opened
+    //open the stream to the file
+    picture.open(filename);
+    //check if che file it's been opened
+    if (picture.fail()) {
         cout << "Errore di caricamento" << endl;
     }
 
-    //controlla se la riga letta  è un commento, in tal caso la salta
-    string a="";
-    bool flag=false;
+    this->commentCheck(&picture);
 
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        magic=a;
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        width=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        height=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        max=atoi(a.c_str());
-    }
-
-    path=filename;      //mette il percorso dell'immagine nell'attributo path dell'oggetto immagine
-    cout<<path<<endl;
+    path=filename;
+    /*cout<<path<<endl;
     cout<<magic<<endl;
     cout<<width<<endl;
     cout<<height<<endl;
-    cout<<max<<endl;
+    cout<<max<<endl;*/
 
-    pixels = new char*[width]; //  allocate memory for the pixels matrix
+    //allocate memory for the pixels matrix
+    pixels = new char*[width];
     for(int i=0; i<width;i++)
         pixels[i]=new char[height];
+
+    //dimensione in bytes dell'immagine
     int size = width*height;
 
+    //alloca memoria per bytes
     bytes = new char[size];
 
-
-    //LEGGE IL FILE E LO METTE IN bytes
+    //legge il file e lo mette in bytes
     picture.read(bytes, size);
 
-
-
-    // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
+    // mette in pixels i valori immagazzinati in bytes
     for (int i=0; i<height; i++){
         for(int j=0; j<width; j++) {
             pixels[i][j] = bytes[(i*width)+j];
         }
     }
-    picture.close();             //close the stream
 
+    picture.close();
 }
 
 void TwoChannels::saveImage(string filename) {
     ofstream imageFile;
     imageFile.open(filename);
 
-    // write the ppm header
+    //write the ppm header
     imageFile << magic << endl << width << endl << height
-              << endl << to_string(max);// << endl;
+              << endl << to_string(max) << endl;
 
 
-    //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
+    //scrive il contenuto di bytes nel file
     imageFile.write(bytes,width*height);
-    imageFile.close();          //close the stream
-
+    imageFile.close();
 }
 
 
 void TwoChannels::effect(float** e) {
     float sum;
+    //parametri usati per indicizzare la matrice kernel 3x3 dell'effetto usato
     int a, b;
-  /*  cout<<endl<<(int)(unsigned char)bytes[1]<<endl;
-    cout<<endl<<(int)(unsigned char)bytes[2]<<endl;
-    cout<<endl<<(unsigned char)bytes[2]<<endl;
-*/
-
-
-
-   /* cout<<"9 elementi di pixels prima di blur"<<endl;
-    for(int i=0; i<3;i++)
-        for(int j=0; j<3;j++)
-            cout<<(int)(unsigned char)pixels[i][j]<<endl;
-
-*/
-
-
 
     for(int k=0; k<height-2;k++)
         for(int h=0; h<width-2;h++) {
@@ -139,32 +83,18 @@ void TwoChannels::effect(float** e) {
             }
             pixels[k][h] = sum;
         }
+
+    //le dimensioni dell'immagine si riducono di 2 in seguito alla convoluione
     width-=2;
     height-=2;
 
-
-    cout<<endl<<(int)pixels[0][0]<<endl;
-
+    //reinstanzia bytes con le nuove dimensioni
     bytes = new char[width*height];
-    bytes[0]='\n';
+    //bytes[0]='\n';
 
-    cout<<endl;
-    cout<<path<<endl;
-    cout<<magic<<endl;
-    cout<<width<<endl;
-    cout<<height<<endl;
-    cout<<max<<endl;
-
-    for(int i=0; i<10;i++)
-        cout<<pixels[0][i];
-
-    cout<<endl;
-
+    //mette la nuova immagine in bytes per essere salvata
     for(int i=1; i<height;i++)
         for(int j=0; j<width;j++)
             bytes[i*width+j]=pixels[i][j];
-
-
-    // /home/iacopo/Desktop/immagini/aaa.pgm
 }
 

@@ -1,6 +1,6 @@
 
 #include "FourChannels.h"
-#include <fstream>
+//#include <fstream>
 #include <iostream>
 #include <bitset>
 
@@ -15,51 +15,7 @@ void FourChannels::loadImage(string filename) {
         cout << "Errore di caricamento" << endl;
     }
 
-    //controlla se la riga letta  è un commento, in tal caso la salta
-    string a="";
-    bool flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        magic=a;
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        width=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        height=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        max=atoi(a.c_str());
-    }
+    this->commentCheck(&picture);
 
     path=filename;
     cout<<path<<endl;
