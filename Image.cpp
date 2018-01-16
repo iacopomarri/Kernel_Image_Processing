@@ -26,7 +26,7 @@ void Image::setMagic(string m) {this->magic = m;}
 //è necessario cambiare la struttura della classe usando un vettore al posto dei singoli
 //attributi, e di conseguenza vanno cambiate diverse cose nel programma
 
-void Image::commentCheck(ifstream* picture) {
+void Image::headerCommentCheck(ifstream* picture) {
     string byteToCheck = "";
     bool isComment = false;
 

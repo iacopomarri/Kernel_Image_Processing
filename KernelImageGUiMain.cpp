@@ -1,15 +1,9 @@
-
-
 #include "KernelImageGUiMain.h"
-
 #include <wx/msgdlg.h>
-//(*InternalHeaders(KernelImageGUiFrame)
-
 #include <wx/log.h>
-//*)
 
-//(*InternalHeaders(KernelImageGUiFrame
-//*)
+
+
 
 //helper functions
 enum wxbuildinfoformat {
@@ -114,7 +108,7 @@ KernelImageGUiFrame::KernelImageGUiFrame(wxWindow* parent,wxWindowID id)
 
 KernelImageGUiFrame::~KernelImageGUiFrame()
 {
-    //(*Destroy(KernelImageGUiFrame)
+    //(*Destroy(KernelImageGUiFrame)a.
     //*)
 }
 
@@ -137,8 +131,10 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     Button3->Enable(true);
     Button4->Enable(true);
     Button5->Enable(true);
+
     //prende il testo nella casella del percorso da caricare
     wxString s= TextCtrl1->GetValue();
+
     //converte in standard string
     std::string loadPath = s.ToStdString();
 
@@ -154,16 +150,13 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
         i=&i2;
     else if(p=="P3" || p=="P6")
         i=&i3;
+
     //carica l'immagine
     i->loadImage(loadPath);
+
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
-
-
 }
-
-
-
 
 
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
@@ -175,17 +168,25 @@ void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
 
 void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 {
-
     i->effect(e.getBlur());
+    Button3->Enable(false);
+    Button4->Enable(false);
+    Button5->Enable(false);
 }
 
 void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
 {
     i->effect(e.getSharpen());
+    Button3->Enable(false);
+    Button4->Enable(false);
+    Button5->Enable(false);
 }
 
 void KernelImageGUiFrame::OnButton5Click(wxCommandEvent& event)
 {
     i->effect(e.getEdgedetection());
+    Button3->Enable(false);
+    Button4->Enable(false);
+    Button5->Enable(false);
 }
 

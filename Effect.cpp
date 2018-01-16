@@ -70,6 +70,7 @@ Effect::Effect() {
 
 float** Effect::getBlur() { return blur;}
 float** Effect::getSharpen() {return sharpen;}
-float** Effect::getTopsobel() {return topsobel;}
 float** Effect::getEdgedetection() {return edgedetection;}
-float** Effect::getIdentity() {return identity;}
+//float** Effect::getIdentity() {return identity;}
+//float** Effect::getTopsobel() {return topsobel;}
+

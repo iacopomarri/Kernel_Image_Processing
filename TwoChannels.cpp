@@ -7,23 +7,24 @@
 
 TwoChannels::TwoChannels():Image(){}
 
+TwoChannels::~TwoChannels() {
+    for (int i = 0; i < width; i++)
+        delete[] pixels[i];
+    delete  pixels;
+}
+
 void TwoChannels::loadImage(string filename) {
     ifstream picture;
+    path=filename;
+
     //open the stream to the file
     picture.open(filename);
-    //check if che file it's been opened
+    //check if che file it's been correctly opened
     if (picture.fail()) {
         cout << "Errore di caricamento" << endl;
     }
 
-    this->commentCheck(&picture);
-
-    path=filename;
-    /*cout<<path<<endl;
-    cout<<magic<<endl;
-    cout<<width<<endl;
-    cout<<height<<endl;
-    cout<<max<<endl;*/
+    this->headerCommentCheck(&picture);
 
     //allocate memory for the pixels matrix
     pixels = new char*[width];

@@ -6,9 +6,15 @@
 
 
 ThreeChannels::ThreeChannels():Image(){}
+ThreeChannels::~ThreeChannels() {
+    for (int i = 0; i < width; i++)
+        delete[] pixels[i];
+    delete  pixels;
+}
 
 void ThreeChannels::loadImage(string filename) {
         ifstream picture;
+        path=filename;
 
         //open the stream to the file
         picture.open(filename);
@@ -18,15 +24,8 @@ void ThreeChannels::loadImage(string filename) {
             cout << "Errore di caricamento" << endl;
         }
 
-        this->commentCheck(&picture);
-
-        path=filename;
-        cout<<path<<endl;
-        cout<<magic<<endl;
-        cout<<width<<endl;
-        cout<<height<<endl;
-        cout<<max<<endl;
-
+        this->headerCommentCheck(&picture);
+    cout<<magic<<endl;
 
         //allocate memory for the pixels matrix
         pixels = new Color*[width];
@@ -103,13 +102,13 @@ void ThreeChannels::effect(float** e) {
                 //da risolvere il problema che alcuni suerano 255
 
                 pixels[k][h].setR(sumR);
-                if(sumR>255)    pixels[k][h].setR(255);
+                if(sumR>255)    pixels[k][h].setR((char)255);
 
                 pixels[k][h].setG(sumG);
-                if(sumG>255) pixels[k][h].setG(255);
+                if(sumG>255) pixels[k][h].setG((char)255);
 
                 pixels[k][h].setB(sumB);
-                if(sumB>255)  pixels[k][h].setB(255);
+                if(sumB>255)  pixels[k][h].setB((char)255);
 
             }
 

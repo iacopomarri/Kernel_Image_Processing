@@ -18,14 +18,16 @@ public:
 
     virtual void loadImage(string filename)=0;
     virtual void saveImage(string filename)=0;
+
+    //effect applica l'effetto desiderato all'immagine; float** e è un vettore bidimensionale 3x3 contenente il kernel
     virtual void effect(float** e)=0;
 
     //ritorna il magic number dell'immagine (P1, P2...)
     string magicCheck(string filename);
 
-    //trova ed evita i commenti nell'immagine. legge gli attributi
+    //legge l'header dell'immagine evitando le righe di commento.
     //ifstream passato come riferimento altrimenti dà problema "deleted function"
-    void commentCheck(ifstream* picture);
+    void headerCommentCheck(ifstream* picture);
 
 
 

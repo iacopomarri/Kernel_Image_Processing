@@ -10,11 +10,12 @@ OneChannel::~OneChannel(){
     for(int i = 0; i < width; ++i) {
         delete [] pixels[i];
     }
-    delete [] pixels;
+    delete  pixels;
 };
 
 void OneChannel::loadImage(string filename) {
     ifstream picture;
+    path=filename;
 
     //open the stream to the file
     picture.open(filename);
@@ -24,15 +25,7 @@ void OneChannel::loadImage(string filename) {
         cout << "Errore di caricamento" << endl;
     }
 
-    this->commentCheck(&picture);
-
-
-    path=filename;
-    /*cout<<path<<endl;
-    cout<<magic<<endl;
-    cout<<width<<endl;
-    cout<<height<<endl;
-    cout<<path;*/
+    this->headerCommentCheck(&picture);
 
 
     pixels = new bool*[height]; //  allocate memory for the pixels matrix

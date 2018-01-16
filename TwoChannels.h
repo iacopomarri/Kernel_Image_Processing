@@ -8,6 +8,8 @@
 class TwoChannels: public Image {
 public:
     TwoChannels();
+    ~TwoChannels();
+
 
     void loadImage(string filename)override;
     void saveImage(string filename)override;
