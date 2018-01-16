@@ -79,6 +79,7 @@ void OneChannel::saveImage(string filename) {
 
 }
 
+//TODO
 void OneChannel::effect(float** e) {
 }
 
