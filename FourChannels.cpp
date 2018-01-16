@@ -69,6 +69,6 @@ void FourChannels::saveImage(string filename) {
 }
 
 
-//TODO
+//TODO implement this
 void FourChannels::effect(float** e) {
 }

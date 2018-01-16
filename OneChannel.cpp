@@ -27,8 +27,8 @@ void OneChannel::loadImage(string filename) {
 
     this->headerCommentCheck(&picture);
 
-
-    pixels = new bool*[height]; //  allocate memory for the pixels matrix
+    //allocate memory for the pixels matrix
+    pixels = new bool*[height];
 
     for(int i=0; i<height;i++) {
         pixels[i] = new bool[width];
@@ -40,6 +40,7 @@ void OneChannel::loadImage(string filename) {
 
 
     bytes = new char[size];
+
     //legge il file e lo mette in bytes
     picture.read(bytes, size);
     cout<<size;
@@ -79,7 +80,7 @@ void OneChannel::saveImage(string filename) {
 
 }
 
-//TODO
+//TODO implement this
 void OneChannel::effect(float** e) {
 }
 
