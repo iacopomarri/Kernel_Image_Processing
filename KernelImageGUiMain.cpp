@@ -1,22 +1,13 @@
 #include "KernelImageGUiMain.h"
 
 #include <wx/msgdlg.h>
-#include "TwoChannels.h"
-#include "ThreeChannels.h"
-#include "OneChannel.h"
 
 //(*InternalHeaders(KernelImageGUiFrame)
-#include <wx/string.h>
-#include <wx/intl.h>
+
 #include <wx/log.h>
 //*)
-#include "Image.h"
-#include <wx/msgdlg.h>
 
-//(*InternalHeaders(KernelImageGUiFrame)
-#include <wx/string.h>
-#include <wx/intl.h>
-//*)
+//(*InternalHeaders(KernelImageGUiFrame)//*)
 
 //helper functions
 enum wxbuildinfoformat {

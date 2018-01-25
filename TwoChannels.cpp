@@ -1,4 +1,4 @@
-
+ 
 #include "TwoChannels.h"
 #include <fstream>
 #include <iostream>
