@@ -1,13 +1,12 @@
-//
-// Created by iacopo on 12/10/16.
-//
-
 #ifndef KERNELIMAGEPROCESSING_IMAGE_H
 #define KERNELIMAGEPROCESSING_IMAGE_H
 
 #include <string>
+#include <fstream>
+
 
 using namespace std;
+
 
 class Image{
 public:
@@ -19,8 +18,16 @@ public:
 
     virtual void loadImage(string filename)=0;
     virtual void saveImage(string filename)=0;
+
+    //effect applica l'effetto desiderato all'immagine; float** e è un vettore bidimensionale 3x3 contenente il kernel
     virtual void effect(float** e)=0;
-    string check(string filename);
+
+    //ritorna il magic number dell'immagine (P1, P2...)
+    string magicCheck(string filename);
+
+    //legge l'header dell'immagine evitando le righe di commento.
+    //ifstream passato come riferimento altrimenti dà problema "deleted function"
+    void headerCommentCheck(ifstream* picture);
 
 
 
@@ -41,7 +48,7 @@ protected:
     int width;
     int height;
     int max;
-    char* bytes;
+    char* bytes; //contiene i bytes dell'immagine in sequenza senza far distinzione tra i vari pixels, serve per leggere e scrivere l'immagine sul file
 
 
 

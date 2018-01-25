@@ -9,6 +9,8 @@
 class Effect {
 public:
     Effect();
+
+    //TODO all static methods
     float** getBlur();
     float** getSharpen();
     float** getTopsobel();
@@ -16,9 +18,11 @@ public:
     float** getIdentity();
 
 private:
+
+    //TODO all static members
     float** blur;
     float** sharpen;
-    float**topsobel;
+    float** topsobel;
     float** edgedetection;
     float** identity;
 

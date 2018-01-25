@@ -1,6 +1,3 @@
-//
-// Created by Lorenzo De Luca on 16/10/17.
-//
 
 #ifndef KERNELIMAGEPROCESSING_TWOCHANNELS_H
 #define KERNELIMAGEPROCESSING_TWOCHANNELS_H
@@ -11,6 +8,8 @@
 class TwoChannels: public Image {
 public:
     TwoChannels();
+    ~TwoChannels();
+
 
     void loadImage(string filename)override;
     void saveImage(string filename)override;

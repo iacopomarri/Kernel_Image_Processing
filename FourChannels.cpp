@@ -1,75 +1,32 @@
-
 #include "FourChannels.h"
-#include <fstream>
 #include <iostream>
 #include <bitset>
 
 FourChannels::FourChannels():Image(){}
+FourChannels::~FourChannels() {
+        for (int i = 0; i < width; i++)
+            delete[] pixels[i];
+    delete  pixels;
+}
 
 
 void FourChannels::loadImage(string filename) {
 
     ifstream picture;
-    picture.open(filename);                            //open the stream to the file
-    if (picture.fail()) {                              //check if che file it's been opened
+    path=filename;
+
+    //open the stream to the file
+    picture.open(filename);
+
+    //check if che file it's been opened
+    if (picture.fail()) {
         cout << "Errore di caricamento" << endl;
     }
 
-    //controlla se la riga letta  è un commento, in tal caso la salta
-    string a="";
-    bool flag=false;
+    this->headerCommentCheck(&picture);
 
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        magic=a;
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        width=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        height=atoi(a.c_str());
-    }
-
-    flag=false;
-
-    while(!flag) {
-        picture >> a;
-        if (a == "#")
-            std::getline(picture, a);
-        else
-            flag = true;
-        max=atoi(a.c_str());
-    }
-
-    path=filename;
-    cout<<path<<endl;
-    cout<<magic<<endl;
-    cout<<width<<endl;
-    cout<<height<<endl;
-    cout<<max<<endl;
-
-
-    pixels = new Transparent_Color*[width];         //  allocate memory for the pixels matrix
+    //  allocate memory for the pixels matrix
+    pixels = new Transparent_Color*[width];
     for(int i=0; i<width;i++)
         pixels[i]=new Transparent_Color[height];
 
@@ -93,7 +50,7 @@ void FourChannels::loadImage(string filename) {
         }
 
 
-    picture.close();             //close the stream
+    picture.close();
 }
 
 
@@ -111,5 +68,7 @@ void FourChannels::saveImage(string filename) {
     imageFile.close(); //close the stream
 }
 
+
+//TODO
 void FourChannels::effect(float** e) {
 }

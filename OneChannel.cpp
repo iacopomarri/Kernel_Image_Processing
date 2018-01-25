@@ -1,7 +1,6 @@
 
 
 #include "OneChannel.h"
-#include <fstream>
 #include <iostream>
 #include <bitset>
 
@@ -11,62 +10,22 @@ OneChannel::~OneChannel(){
     for(int i = 0; i < width; ++i) {
         delete [] pixels[i];
     }
-    delete [] pixels;
+    delete  pixels;
 };
 
 void OneChannel::loadImage(string filename) {
     ifstream picture;
-    picture.open(filename);                            //open the stream to the file
-    if (picture.fail()) {                              //check if che file it's been opened
+    path=filename;
+
+    //open the stream to the file
+    picture.open(filename);
+
+    //check if che file it's been opened
+    if (picture.fail()) {
         cout << "Errore di caricamento" << endl;
     }
 
-
-    //controlla se la riga letta  è un commento, in tal caso la salta
-        string a="";
-        bool flag=false;
-
-        while(!flag) {
-            picture >> a;
-            if (a == "#")
-                std::getline(picture, a);
-            else
-                flag = true;
-                magic=a;
-        }
-
-        flag=false;
-
-        while(!flag) {
-            picture >> a;
-            if (a == "#")
-                std::getline(picture, a);
-            else
-                flag = true;
-            width=atoi(a.c_str());
-        }
-
-        flag=false;
-
-        while(!flag) {
-            picture >> a;
-            if (a == "#")
-                std::getline(picture, a);
-            else
-                flag = true;
-            height=atoi(a.c_str());
-        }
-
-
-
-
-
-    path=filename;      //mette il percorso dell'immagine nell'attributo path dell'oggetto immagine
-    cout<<path<<endl;
-    cout<<magic<<endl;
-    cout<<width<<endl;
-    cout<<height<<endl;
-    cout<<path;
+    this->headerCommentCheck(&picture);
 
 
     pixels = new bool*[height]; //  allocate memory for the pixels matrix
@@ -81,11 +40,11 @@ void OneChannel::loadImage(string filename) {
 
 
     bytes = new char[size];
-    //LEGGE IL FILE E LO METTE IN bytes
+    //legge il file e lo mette in bytes
     picture.read(bytes, size);
     cout<<size;
 
-    // METTE IN PIXELS I VALORI IMMAGAZZINATI IN bytes
+    //mette in pixels i valori immagazzinati in bytes
     bool bits[width*height];
     //Per ogni byte estraiamo 8 bit
     for(int k=0; k< size; k++) {
@@ -100,7 +59,7 @@ void OneChannel::loadImage(string filename) {
         }
     }
 
-    picture.close();             //close the stream
+    picture.close();
 
     }
 
@@ -111,12 +70,12 @@ void OneChannel::saveImage(string filename) {
     imageFile.open(filename);
 
     // write the ppm header
-    imageFile << magic << endl << width << endl << height;// << endl;
+    imageFile << magic << endl << width << endl << height << endl;
 
 
-    //  SCRIVE IL CONTENUTO DI BYTES NEL FILE
+    //scrive il contenuto di bytes nel file
     imageFile.write(bytes,width*height/8);
-    imageFile.close();          //close the stream
+    imageFile.close();
 
 }
 
