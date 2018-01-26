@@ -15,7 +15,7 @@ class ThreeChannels: public Image {
 
         void loadImage(string filename)override ;
         void saveImage(string filename)override ;
-    void effect(float** e)override ;
+        void effect(float** e)override ;
 
 
     private:

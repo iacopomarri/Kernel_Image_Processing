@@ -1,6 +1,5 @@
 
 #include "TwoChannels.h"
-#include <fstream>
 #include <iostream>
 #include <bitset>
 
@@ -37,6 +36,7 @@ void TwoChannels::loadImage(string filename) {
     //alloca memoria per bytes
     bytes = new char[size];
 
+
     //legge il file e lo mette in bytes
     picture.read(bytes, size);
 
@@ -49,6 +49,7 @@ void TwoChannels::loadImage(string filename) {
 
     picture.close();
 }
+
 
 void TwoChannels::saveImage(string filename) {
     ofstream imageFile;
@@ -66,6 +67,10 @@ void TwoChannels::saveImage(string filename) {
 
 
 void TwoChannels::effect(float** e) {
+    //valori infinito meno infinito
+    double max=-1.0/0.0;
+    double min=1.0/0.0;
+
     float sum;
     //parametri usati per indicizzare la matrice kernel 3x3 dell'effetto usato
     int a, b;
@@ -83,19 +88,34 @@ void TwoChannels::effect(float** e) {
                 a++;
             }
             pixels[k][h] = sum;
+
+            if(sum>max)
+                max=sum;
+            if(sum<min)
+                min=sum;
+
         }
 
-    //le dimensioni dell'immagine si riducono di 2 in seguito alla convoluione
+
+    //le dimensioni dell'immagine si riducono di 2 in seguito alla convoluzione
     width-=2;
     height-=2;
 
+    //normalizzazione
+    for(int i=0; i<height;i++)
+        for(int j=0; j<width;j++)
+                pixels[i][j] = (pixels[i][j] - min) * (255 / (max - min));
+
+
+
     //reinstanzia bytes con le nuove dimensioni
     bytes = new char[width*height];
-    //bytes[0]='\n';
+
 
     //mette la nuova immagine in bytes per essere salvata
-    for(int i=1; i<height;i++)
+    for(int i=0; i<height;i++)
         for(int j=0; j<width;j++)
             bytes[i*width+j]=pixels[i][j];
+
 }
 

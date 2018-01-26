@@ -20,7 +20,7 @@ public:
 
 private:
 
-    //TODO make all members static
+    //TODO make all members static and const
     float** blur;
     float** sharpen;
     float** topsobel;

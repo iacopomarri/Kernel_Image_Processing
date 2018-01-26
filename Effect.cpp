@@ -44,7 +44,7 @@ Effect::Effect() {
     topsobel[1][1]=0;
     topsobel[1][2]=0;
     topsobel[2][0]=-1;
-    topsobel[2][1]=2;
+    topsobel[2][1]=-2;
     topsobel[2][2]=-1;
 
     edgedetection[0][0]=-1;

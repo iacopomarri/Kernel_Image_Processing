@@ -158,14 +158,14 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
     StaticText1->SetLabel("Loaded path:  "+ s);
 }
 
-
+//save
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     wxString s= TextCtrl2->GetValue();
     std::string savePath = s.ToStdString();
     i->saveImage(savePath);
 
 }
-
+//blur
 void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 {
     i->effect(e.getBlur());
@@ -173,7 +173,7 @@ void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
     Button4->Enable(false);
     Button5->Enable(false);
 }
-
+//sharpen
 void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
 {
     i->effect(e.getSharpen());
@@ -181,7 +181,7 @@ void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
     Button4->Enable(false);
     Button5->Enable(false);
 }
-
+//edgedetection
 void KernelImageGUiFrame::OnButton5Click(wxCommandEvent& event)
 {
     i->effect(e.getEdgedetection());

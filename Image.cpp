@@ -64,7 +64,7 @@ void Image::headerCommentCheck(ifstream* picture) {
 
     isComment = false;
 
-    if (magic != "P1" or magic != "P4") {
+    if (magic != "P1" and magic != "P4") {
         while (!isComment) {
             *picture >> byteToCheck;
             if (byteToCheck == "#")

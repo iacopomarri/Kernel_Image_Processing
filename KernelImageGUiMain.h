@@ -69,9 +69,9 @@ private:
     wxTextCtrl* TextCtrl1;
     wxTextCtrl* TextCtrl2;
     wxStaticText* StaticText1;
-    OneChannel i1;
-    TwoChannels i2;
-    ThreeChannels i3;
+    OneChannel i1 = OneChannel();
+    TwoChannels i2 = TwoChannels();
+    ThreeChannels i3 = ThreeChannels();
     Image *i;
     Effect e= Effect();
     //*)
