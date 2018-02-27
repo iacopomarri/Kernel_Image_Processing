@@ -143,16 +143,16 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 
 
     //check del tipo
-    string p=i->magicCheck(loadPath);
+  /*  string p=i->magicCheck(loadPath);
     if (p=="P1" || p=="P4")
         i=&i1;
     else if(p=="P2" || p=="P5")
         i=&i2;
     else if(p=="P3" || p=="P6")
         i=&i3;
-
+*/
     //carica l'immagine
-    i->loadImage(loadPath);
+    i.loadImage(loadPath);
 
     //aggiorna la label del percorso caricato
     StaticText1->SetLabel("Loaded path:  "+ s);
@@ -162,13 +162,13 @@ void KernelImageGUiFrame::OnButton1Click1(wxCommandEvent& event)
 void KernelImageGUiFrame::OnButton2Click2(wxCommandEvent &event) {
     wxString s= TextCtrl2->GetValue();
     std::string savePath = s.ToStdString();
-    i->saveImage(savePath);
+    i.saveImage(savePath);
 
 }
 //blur
 void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 {
-    i->effect(e.getBlur());
+    i.effect(e.getBlur());
     Button3->Enable(false);
     Button4->Enable(false);
     Button5->Enable(false);
@@ -176,7 +176,7 @@ void KernelImageGUiFrame::OnButton3Click(wxCommandEvent& event)
 //sharpen
 void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
 {
-    i->effect(e.getSharpen());
+    i.effect(e.getSharpen());
     Button3->Enable(false);
     Button4->Enable(false);
     Button5->Enable(false);
@@ -184,7 +184,7 @@ void KernelImageGUiFrame::OnButton4Click(wxCommandEvent& event)
 //edgedetection
 void KernelImageGUiFrame::OnButton5Click(wxCommandEvent& event)
 {
-    i->effect(e.getEdgedetection());
+    i.effect(e.getEdgedetection());
     Button3->Enable(false);
     Button4->Enable(false);
     Button5->Enable(false);
