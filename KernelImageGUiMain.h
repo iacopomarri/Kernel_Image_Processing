@@ -13,9 +13,6 @@
 #include <wx/textctrl.h>
 #include <wx/stattext.h>
 #include "Image.h"
-#include "OneChannel.h"
-#include "ThreeChannels.h"
-#include "TwoChannels.h"
 #include "Effect.h"
 //*)
 
@@ -69,10 +66,11 @@ private:
     wxTextCtrl* TextCtrl1;
     wxTextCtrl* TextCtrl2;
     wxStaticText* StaticText1;
-    OneChannel i1;
-    TwoChannels i2;
-    ThreeChannels i3;
-    Image *i;
+   /* OneChannel i1 = OneChannel();
+    TwoChannels i2 = TwoChannels();
+    ThreeChannels i3 = ThreeChannels();*/
+    //Image *i;
+    Image i;
     Effect e= Effect();
     //*)
 

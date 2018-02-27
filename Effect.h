@@ -9,8 +9,9 @@
 class Effect {
 public:
     Effect();
+    //TODO virtual destructor
 
-    //TODO all static methods
+    //TODO make all methods static
     float** getBlur();
     float** getSharpen();
     float** getTopsobel();
@@ -19,7 +20,7 @@ public:
 
 private:
 
-    //TODO all static members
+    //TODO make all members static and const
     float** blur;
     float** sharpen;
     float** topsobel;
