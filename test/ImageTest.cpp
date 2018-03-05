@@ -23,7 +23,7 @@ TEST(Image, Effect){
     Image i;
     Effect e;
 
-    i.loadImage("test.ppm");
+    i.loadImage("../../test/test.ppm");
     i.effect(e.getEdgedetection());
     ASSERT_EQ(510, i.getWidth());
     ASSERT_EQ(510, i.getHeight());
