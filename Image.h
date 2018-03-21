@@ -5,13 +5,13 @@
 #include <fstream>
 #include <array>
 #include "Color.h"
-#include "ImageBase.h"
+#include "Image_Base.h"
 
 
 using namespace std;
 
 template <typename T>
-class Image:public ImageBase{
+class Image:public Image_Base{
 public:
     Image();
     //virtual ~Image();
