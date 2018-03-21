@@ -6,6 +6,7 @@
 
 //(*AppHeaders
 #include "KernelImageGUiMain.h"
+#include <wx/image.h>
 //*)
 
     IMPLEMENT_APP(KernelImageGUiApp);

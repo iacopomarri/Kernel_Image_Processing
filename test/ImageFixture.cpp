@@ -19,7 +19,7 @@ protected:
 };
 
 TEST_F(ImageSuite, TestLoad){
-    i.loadImage("test.ppm");
+    i.loadImage("../../test/test.ppm");
     cout<<i.getPath()<<endl;
 
     //magic= P6, w=512, h=512, max=255, size=786432

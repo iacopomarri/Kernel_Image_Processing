@@ -8,7 +8,7 @@
 
 Image::Image():magic("null"),path("null"),width(0),height(0),max(0),size(0){}
 
-Image::~Image() { delete[] bytes; }
+//Image::~Image() { delete[] bytes; }
 
 int Image::getHeight()const{return height; }
 int Image::getWidth()const {return width; }
@@ -24,6 +24,24 @@ void Image::setMagic(string m) {this->magic = m;}
 void Image::setPath(string p) {this->path=p;}
 void Image::setSize(int s) {this->size=s;}
 
+void Image::modifyGrey(int i, int j, char grey) {
+    greyPixels[i][j]=grey;
+}
+void Image::modifyRGB(int i, int j, char R, char G, char B) {
+    RGBPixels[i][j].setR(R);
+    RGBPixels[i][j].setG(G);
+    RGBPixels[i][j].setB(B);
+}
+char Image::readGrey(int i, int j) {
+    return greyPixels[i][j];
+}
+Color Image::readRGB(int i, int j) {
+    Color pixel;
+    pixel.setR(RGBPixels[i][j].getR());
+    pixel.setG(RGBPixels[i][j].getG());
+    pixel.setB(RGBPixels[i][j].getB());
+    return pixel;
+}
 
 //controlla se la riga letta  è un commento, in tal caso la salta
 //il tutto è ripetuto 1 volta per ogni attributo; per fare tutto in un unico ciclo
@@ -32,6 +50,7 @@ void Image::setSize(int s) {this->size=s;}
 
 void Image::loadImage(string filename) {
     ifstream picture;
+    char* temp;
 
     path=filename;
 
@@ -50,10 +69,10 @@ void Image::loadImage(string filename) {
     //greyscale
     if(magic=="P2" or magic=="P5") {
         //alloca memoria per bytes
-        bytes = new char[size];
+        temp = new char[size];
 
         //legge il file e lo mette in bytes
-        picture.read(bytes, size);
+        picture.read(temp, size);
 
         //allocate memory for the pixels matrix
         greyPixels = new char*[width];
@@ -63,7 +82,7 @@ void Image::loadImage(string filename) {
         // mette in pixels i valori immagazzinati in bytes
         for (int i=0; i<height; i++){
             for(int j=0; j<width; j++) {
-                greyPixels[i][j] = bytes[(i*width)+j];
+                greyPixels[i][j] = temp[(i*width)+j];
             }
         }
     }
@@ -74,10 +93,10 @@ void Image::loadImage(string filename) {
         size*=3;
 
         //alloca memoria per bytes
-        bytes = new char[size];
+        temp = new char[size];
 
         //legge il file e lo mette in bytes
-        picture.read(bytes, size);
+        picture.read(temp, size);
 
         //allocate memory for the pixels matrix
         RGBPixels = new Color*[width];
@@ -87,9 +106,9 @@ void Image::loadImage(string filename) {
         //mette in pixels i valori immagazzinati in bytes
         for (int i=0; i<height; i++)
             for(int j=0; j<width;j++) {
-                RGBPixels[i][j].setR(bytes[3*i*width+3*j]);
-                RGBPixels[i][j].setG(bytes[3*i*width+3*j+1]);
-                RGBPixels[i][j].setB(bytes[3*i*width+3*j+2]);
+                RGBPixels[i][j].setR(temp[3*i*width+3*j]);
+                RGBPixels[i][j].setG(temp[3*i*width+3*j+1]);
+                RGBPixels[i][j].setB(temp[3*i*width+3*j+2]);
             }
     }
 
@@ -101,19 +120,38 @@ void Image::loadImage(string filename) {
 void Image::saveImage(string filename) {
     ofstream imageFile;
     imageFile.open(filename);
+    char* temp;
+    temp=new char[size];
+    //mette la nuova immagine in temp per essere salvata
+    //+1 all'inizio dell'indicizzazione serve per lasciare la prima posizione vuota, per aggiungerci poi '\n'. Il metodo read mette all
+    //inizio un accapo, e per far funzionare saveimage lo mettiamo anche noi.
+    if(magic=="P3" or magic=="P6") {
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++) {
+                temp[3 * i * width + 3 * j] = RGBPixels[i][j].getR();
+                temp[3 * i * width + 3 * j + 1] = RGBPixels[i][j].getG();
+                temp[3 * i * width + 3 * j + 2] = RGBPixels[i][j].getB();
+            }
+        temp[0]='\n';
+    }
+    //mette la nuova immagine in temp per essere salvata
+    else if(magic=="P2" or magic=="P5") {
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++)
+                temp[i * width + j] = greyPixels[i][j];
+        temp[0]='\n';
+    }
 
     //write the ppm header
     imageFile << magic << endl << width << endl << height;
 
     if (magic != "P1" and magic != "P4")
-        imageFile <<endl<< to_string(max);//<<endl;
-
-    if(magic=="P2" or magic=="P5")
-        imageFile <<endl;
+        imageFile <<endl<< to_string(max);
 
 
-    //scrive il contenuto di bytes nel file
-    imageFile.write(bytes,size);
+
+    //scrive il contenuto di temp nel file
+    imageFile.write(temp,size);
     imageFile.close();
 }
 
@@ -196,42 +234,19 @@ void Image::effect(float **e) {
             }
     }
 
-
-    //reinstanzia bytes con le nuove dimensioni
-    delete [] bytes;
-    bytes = new char[size];
-
     //normalizzazione
     if(magic=="P3" or magic=="P6") {
-    for(int i=0; i<height;i++)
-        for(int j=0; j<width;j++) {
-            RGBPixels[i][j].setR((RGBPixels[i][j].getR() - minR) * (255 / (maxR - minR)));
-            RGBPixels[i][j].setG((RGBPixels[i][j].getG() - minG) * (255 / (maxG - minG)));
-            RGBPixels[i][j].setB((RGBPixels[i][j].getB() - minB) * (255 / (maxB - minB)));
-        }
-
-        //mette la nuova immagine in bytes per essere salvata
-        //+1 all'inizio dell'indicizzazione serve per lasciare la prima posizione vuota, per aggiungerci poi '\n'. Il metodo read mette all
-        //inizio un accapo, e per far funzionare saveimage lo mettiamo anche noi.
-        for(int i=0; i<height;i++)
-            for(int j=0; j<width;j++) {
-                bytes[3*i * width + 3*j] = RGBPixels[i][j].getR();
-                bytes[3*i* width + 3*j+1] = RGBPixels[i][j].getG();
-                bytes[3*i * width + 3*j+2] = RGBPixels[i][j].getB();
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++) {
+                RGBPixels[i][j].setR((RGBPixels[i][j].getR() - minR) * (255 / (maxR - minR)));
+                RGBPixels[i][j].setG((RGBPixels[i][j].getG() - minG) * (255 / (maxG - minG)));
+                RGBPixels[i][j].setB((RGBPixels[i][j].getB() - minB) * (255 / (maxB - minB)));
             }
-        bytes[0]='\n';
-        }
-
-
+    }
     else if(magic=="P2" or magic=="P5") {
         for(int i=0; i<height;i++)
             for(int j=0; j<width;j++)
                 greyPixels[i][j] = (greyPixels[i][j] - min) * (255 / (max - min));
-
-        //mette la nuova immagine in bytes per essere salvata
-        for(int i=0; i<height;i++)
-            for(int j=0; j<width;j++)
-                bytes[i*width+j]=greyPixels[i][j];
     }
 }
 
@@ -315,14 +330,25 @@ string Image::magicCheck(string filename) {
 
 
 
-/*
+
 Image Image::operator=(const Image& other)
 {
         height = other.height;
         width = other.width;
-      //  loader = other.loader;
-        pixels = other.pixels;
-
+        size = other.size;
+        max = other.max;
+        path = other.path;
+        magic = other.magic;
+    if(magic=="P2" or magic=="P5") {
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++)
+                greyPixels[i][j] = other.greyPixels[i][j];
+    }
+    else if(magic=="P4" or magic=="P6") {
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++)
+                RGBPixels[i][j] = other.RGBPixels[i][j];
+    }
         return *this;
 }
 
@@ -331,23 +357,19 @@ Image::Image(const Image& copy)
 {
         width = copy.width;
         height = copy.height;
-     //   loader = copy.loader;
+        size = copy.size;
+        max = copy.max;
+        path = copy.path;
+        magic = copy.magic;
 
-        pixels = new Color[copy.height];
+        RGBPixels = new Color*[copy.width];
         for(int i = 0; i < copy.height; i++)
-        {
-                pixels = new Color[copy.width];
-        }
-
+                RGBPixels[i] = new Color[copy.height];
         for(int h = 0; h < copy.height; h++)
-        {
                 for(int w = 0; w < copy.width; w++)
-                {
-                        pixels[h*w] = copy.pixels[h*w];
-                }
-        }
+                        RGBPixels[h][w] = copy.RGBPixels[h][w];
 
-}*/
+}
 
 
 

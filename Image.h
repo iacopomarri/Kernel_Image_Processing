@@ -12,10 +12,10 @@ using namespace std;
 class Image{
 public:
     Image();
-    virtual ~Image();
+    //virtual ~Image();
 
-    //Image(const Image& copy);
-    //Image operator=(const Image&);
+    Image(const Image& copy);
+    Image operator=(const Image&);
 
     void loadImage(string filename);
     void saveImage(string filename);
@@ -45,6 +45,10 @@ public:
     void setMagic(string m);
     void setPath(string p);
     void setSize(int size);
+    void modifyRGB(int i, int j, char R, char G, char B);
+    void modifyGrey(int i, int j, char grey);
+    Color readRGB(int i, int j);
+    char readGrey(int i, int j);
 protected:
     string magic;
     string path;
@@ -54,7 +58,7 @@ protected:
     int size;
     char** greyPixels;
     Color** RGBPixels;
-    char* bytes; //contiene i bytes dell'immagine in sequenza senza far distinzione tra i vari pixels, serve per leggere e scrivere l'immagine sul file
+    //char* bytes; //contiene i bytes dell'immagine in sequenza senza far distinzione tra i vari pixels, serve per leggere e scrivere l'immagine sul file
 
 
 

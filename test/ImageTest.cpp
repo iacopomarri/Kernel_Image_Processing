@@ -23,10 +23,27 @@ TEST(Image, Effect){
     Image i;
     Effect e;
 
-    i.loadImage("test.ppm");
+    i.loadImage("../../test/test.ppm");
     i.effect(e.getEdgedetection());
     ASSERT_EQ(510, i.getWidth());
     ASSERT_EQ(510, i.getHeight());
     std::cout<<"Image effect"<<std::endl;
 }
+TEST(Image, GreyPixels){
+    Image i;
+
+    i.loadImage("../../test/test2.pgm");
+    i.modifyGrey(1,1, 65);
+    ASSERT_EQ(65, i.readGrey(1,1));
+}
+TEST(Image, Pixels){
+    Image i;
+
+    i.loadImage("../../test/test.ppm");
+    i.modifyRGB(1,1, 50, 50, 50);
+    ASSERT_EQ(50, i.readRGB(1,1).getR());
+    ASSERT_EQ(50, i.readRGB(1,1).getG());
+    ASSERT_EQ(50, i.readRGB(1,1).getB());
+}
+
 
