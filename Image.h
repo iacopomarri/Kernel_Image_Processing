@@ -1,30 +1,31 @@
 #ifndef KERNELIMAGEPROCESSING_IMAGE_H
 #define KERNELIMAGEPROCESSING_IMAGE_H
 
-#include <string>
+//#include <string>
 #include <fstream>
+#include <array>
 #include "Color.h"
+#include "ImageBase.h"
 
 
 using namespace std;
 
-
-class Image{
+template <typename T>
+class Image:public ImageBase{
 public:
     Image();
     //virtual ~Image();
 
     Image(const Image& copy);
-    Image operator=(const Image&);
+    Image& operator=(const Image&);
 
-    void loadImage(string filename);
-    void saveImage(string filename);
+    void loadImage(string filename) override;
+    void saveImage(string filename) override;
 
     //effect applica l'effetto desiderato all'immagine; float** e è un vettore bidimensionale 3x3 contenente il kernel
-    void effect(float** e);
+    void effect(float** e) override;
 
-    //ritorna il magic number dell'immagine (P1, P2...)
-    //string magicCheck(string filename);
+
 
     //legge l'header dell'immagine evitando le righe di commento.
     //ifstream passato come riferimento altrimenti dà problema "deleted function"
@@ -35,20 +36,25 @@ public:
     int getHeight()const;
     int getWidth()const;
     int getMax()const;
+    int getSize()const;
     string getPath()const;
     string getMagic() const;
-    int getSize()const;
 
     void setHeight(int h);
     void setWidth(int w);
     void setMax(int m);
-    void setMagic(string m);
-    void setPath(string p);
     void setSize(int size);
-    void modifyRGB(int i, int j, char R, char G, char B);
-    void modifyGrey(int i, int j, char grey);
-    Color readRGB(int i, int j);
-    char readGrey(int i, int j);
+    void setPath(string p);
+    void setMagic(string m);
+
+    //metodi per modificare il pixel in posizione (i,j)
+    //void modifyRGB(int i, int j, char R, char G, char B);
+    void modifyPixel(int i, int j, T newPix);
+
+    //metodi per leggere il pixel in posizione (i,j)
+    //Color readRGB(int i, int j);
+    T readPixel(int i, int j);
+
 protected:
     string magic;
     string path;
@@ -56,8 +62,9 @@ protected:
     int height;
     int max;
     int size;
-    char** greyPixels;
-    Color** RGBPixels;
+    T** Pixels;
+    //char** greyPixels;
+    //Color** RGBPixels;
     //char* bytes; //contiene i bytes dell'immagine in sequenza senza far distinzione tra i vari pixels, serve per leggere e scrivere l'immagine sul file
 
 

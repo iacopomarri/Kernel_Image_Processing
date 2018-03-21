@@ -15,7 +15,7 @@ protected:
         i.setMagic("");
         i.setSize(0);
     }
-    Image i;
+    Image<Color> i;
 };
 
 TEST_F(ImageSuite, TestLoad){

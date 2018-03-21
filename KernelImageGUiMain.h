@@ -70,7 +70,7 @@ private:
     TwoChannels i2 = TwoChannels();
     ThreeChannels i3 = ThreeChannels();*/
     //Image *i;
-    Image i;
+    ImageBase* i;
     Effect e= Effect();
     //*)
 
