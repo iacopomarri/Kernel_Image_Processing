@@ -52,5 +52,34 @@ TEST(Image, RGBPixel){
     ASSERT_EQ(50, i.readPixel(1,1).getG());
     ASSERT_EQ(50, i.readPixel(1,1).getB());
 }
+TEST(Image, equalOp){
+    Image<Color> i;
+    Image<Color> i2;
+
+    i.loadImage("../../test/test.ppm"); //baboon 512x512
+    i2.loadImage("../../test/test3.ppm"); //stop 99x99
+
+    i2=i;
+
+    for (int k = 0; k < i2.getHeight(); k++)
+        for (int h = 0; h < i2.getWidth(); h++) {
+            ASSERT_EQ(i2.readPixel(k, h).getR(), i.readPixel(k, h).getR());
+            ASSERT_EQ(i2.readPixel(k, h).getG(), i.readPixel(k, h).getG());
+            ASSERT_EQ(i2.readPixel(k, h).getB(), i.readPixel(k, h).getB());
+        }
+}
+TEST(Image, copyConstructor){
+    Image<Color> i;
+
+    i.loadImage("../../test/test.ppm");
+    Image<Color> i2(i);
+
+    for (int k = 0; k < i2.getHeight(); k++)
+        for (int h = 0; h < i2.getWidth(); h++) {
+            ASSERT_EQ(i2.readPixel(k, h).getR(), i.readPixel(k, h).getR());
+            ASSERT_EQ(i2.readPixel(k, h).getG(), i.readPixel(k, h).getG());
+            ASSERT_EQ(i2.readPixel(k, h).getB(), i.readPixel(k, h).getB());
+        }
+}
 
 

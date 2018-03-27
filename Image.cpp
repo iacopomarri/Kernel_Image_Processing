@@ -346,6 +346,9 @@ Image<T>& Image<T>::operator=(const Image& other)
         max = other.max;
         path = other.path;
         magic = other.magic;
+        Pixels = new T *[width];
+        for (int i = 0; i < width; i++)
+            Pixels[i] = new T[height];
 
         for (int i = 0; i < height; i++)
             for (int j = 0; j < width; j++)
