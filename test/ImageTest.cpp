@@ -61,8 +61,8 @@ TEST(Image, equalOp){
 
     i2=i;
     
-    ASSERT_EQ(i2.getWidth, i.getWidth());
-    ASSERT_EQ(i2.getHeight, i.getHeight());
+    ASSERT_EQ(i2.getWidth(), i.getWidth());
+    ASSERT_EQ(i2.getHeight(), i.getHeight());
     ASSERT_EQ(i2.getSize(), i.getSize());
     ASSERT_EQ(i2.getMax(), i.getMax());
     ASSERT_EQ(i2.getMagic(), i.getMagic());
@@ -81,8 +81,8 @@ TEST(Image, copyConstructor){
     i.loadImage("../../test/test.ppm");
     Image<Color> i2(i);
 
-    ASSERT_EQ(i2.getWidth, i.getWidth());
-    ASSERT_EQ(i2.getHeight, i.getHeight());
+    ASSERT_EQ(i2.getWidth(), i.getWidth());
+    ASSERT_EQ(i2.getHeight(), i.getHeight());
     ASSERT_EQ(i2.getSize(), i.getSize());
     ASSERT_EQ(i2.getMax(), i.getMax());
     ASSERT_EQ(i2.getMagic(), i.getMagic());
