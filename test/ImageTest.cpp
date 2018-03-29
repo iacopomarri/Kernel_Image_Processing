@@ -60,7 +60,14 @@ TEST(Image, equalOp){
     i2.loadImage("../../test/test3.ppm"); //stop 99x99
 
     i2=i;
-
+    
+    ASSERT_EQ(i2.getWidth, i.getWidth());
+    ASSERT_EQ(i2.getHeight, i.getHeight());
+    ASSERT_EQ(i2.getSize(), i.getSize());
+    ASSERT_EQ(i2.getMax(), i.getMax());
+    ASSERT_EQ(i2.getMagic(), i.getMagic());
+    ASSERT_EQ(i2.getPath(), i.getPath());
+    
     for (int k = 0; k < i2.getHeight(); k++)
         for (int h = 0; h < i2.getWidth(); h++) {
             ASSERT_EQ(i2.readPixel(k, h).getR(), i.readPixel(k, h).getR());
@@ -74,6 +81,13 @@ TEST(Image, copyConstructor){
     i.loadImage("../../test/test.ppm");
     Image<Color> i2(i);
 
+    ASSERT_EQ(i2.getWidth, i.getWidth());
+    ASSERT_EQ(i2.getHeight, i.getHeight());
+    ASSERT_EQ(i2.getSize(), i.getSize());
+    ASSERT_EQ(i2.getMax(), i.getMax());
+    ASSERT_EQ(i2.getMagic(), i.getMagic());
+    ASSERT_EQ(i2.getPath(), i.getPath());
+    
     for (int k = 0; k < i2.getHeight(); k++)
         for (int h = 0; h < i2.getWidth(); h++) {
             ASSERT_EQ(i2.readPixel(k, h).getR(), i.readPixel(k, h).getR());
