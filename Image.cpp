@@ -71,9 +71,9 @@ void Image<T>::loadImage(string filename) {
     picture.read(temp, size);
 
     //allocate memory for the pixels matrix
-    Pixels = new T *[width];
-    for (int i = 0; i < width; i++)
-        Pixels[i] = new T[height];
+    Pixels = new T *[height];
+    for (int i = 0; i < height; i++)
+        Pixels[i] = new T[width];
 
     //mette in pixels i valori immagazzinati in temp
     for (int i = 0; i < height; i++)
@@ -108,9 +108,9 @@ void Image<Color>::loadImage(string filename) {
     picture.read(temp, size);
 
     //allocate memory for the pixels matrix
-    Pixels = new Color*[width];
-    for(int i=0; i<width;i++)
-        Pixels[i]=new Color[height];
+    Pixels = new Color*[height];
+    for(int i=0; i<height;i++)
+        Pixels[i]=new Color[width];
 
     //mette in pixels i valori immagazzinati in bytes
     for (int i=0; i<height; i++)
@@ -346,9 +346,10 @@ Image<T>& Image<T>::operator=(const Image& other)
         max = other.max;
         path = other.path;
         magic = other.magic;
-        Pixels = new T *[width];
-        for (int i = 0; i < width; i++)
-            Pixels[i] = new T[height];
+    
+        Pixels = new T *[height];
+        for (int i = 0; i < height; i++)
+            Pixels[i] = new T[width];
 
         for (int i = 0; i < height; i++)
             for (int j = 0; j < width; j++)
@@ -367,12 +368,12 @@ Image<T>::Image(const Image& copy)
         path = copy.path;
         magic = copy.magic;
 
-        Pixels = new T*[copy.width];
-        for(int i = 0; i < copy.height; i++)
-                Pixels[i] = new T[copy.height];
+        Pixels = new T*[height];
+        for(int i = 0; i < height; i++)
+                Pixels[i] = new T[width];
 
-        for(int w = 0; w < copy.width; w++)
-                for(int h = 0; h < copy.height; h++)
+        for(int w = 0; w < height; w++)
+                for(int h = 0; h < width; h++)
                         Pixels[w][h] = copy.Pixels[w][h];
 
 }
