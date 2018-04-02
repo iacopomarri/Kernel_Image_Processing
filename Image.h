@@ -14,7 +14,7 @@ template <typename T>
 class Image:public Image_Base{
 public:
     Image();
-    //virtual ~Image();
+    ~Image();
 
     Image(const Image& copy);
     Image& operator=(const Image&);
