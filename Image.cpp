@@ -389,5 +389,6 @@ Image<T>::Image(const Image& copy)
 
 
 
+
 template class Image<char>;
 template class Image<Color>;
