@@ -7,7 +7,6 @@
 #include "../Image.h"
 #include "../Effect.h"
 
-
 TEST(Image, DefaultConstructor) {
     Image<char> i;
 
@@ -19,7 +18,6 @@ TEST(Image, DefaultConstructor) {
     ASSERT_EQ("null", i.getMagic());
     std::cout<<"DefaultContructor"<<std::endl;
 }
-
 TEST(Image, Effect){
     Image<Color> i;
     Effect e;
@@ -31,6 +29,8 @@ TEST(Image, Effect){
     ASSERT_EQ(510, i.getHeight());
     std::cout<<"Image effect"<<std::endl;
 }
+
+
 TEST(Image, GreyPixel){
     Image<char> i;
 
@@ -38,6 +38,7 @@ TEST(Image, GreyPixel){
     i.modifyPixel(1,1, 65);
     ASSERT_EQ(65, i.readPixel(1,1));
 }
+
 TEST(Image, RGBPixel){
     Image<Color> i;
     Color pixel;

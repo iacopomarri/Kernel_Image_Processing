@@ -6,12 +6,14 @@
 #include <bitset>
 
 template <typename T>
-Image<T>::Image():magic("null"),path("null"),width(0),height(0),max(0),size(0){}
+Image<T>::Image():magic("null"),path("null"),width(0),height(0),max(0),size(0),Pixels(nullptr){}
 template <typename T>
 Image<T>::~Image() {
-    for (int i=0; i<height; i++)
-        delete[] Pixels[i];
-    delete[] Pixels;
+    if(Pixels != nullptr) {
+        for (int i = 0; i < height; i++)
+            delete[] Pixels[i];
+        delete[] Pixels;
+    }
 }
 
 template <typename T>
